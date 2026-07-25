@@ -13,10 +13,14 @@ public class Enemy : MonoBehaviour
     public int goldValue = 10;
 
     private Rigidbody2D rb;
+    private bool isOnCarSide = false;
+    private Transform carTarget = null;
+    private float damageTimer = 0f;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f; // Top-down oyun - aşağı düşmesin
     }
 
     void FixedUpdate()
@@ -35,18 +39,67 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void Update()
     {
-        if (collision.transform == target || collision.collider.CompareTag("Car"))
+        // Arabanın yanında ise zamanla hasar ver
+        if (isOnCarSide && carTarget != null)
+        {
+            damageTimer += Time.deltaTime;
+            
+            if (damageTimer >= 1f)
+            {
+                var carHealth = carTarget.GetComponent<CarHealth>();
+                if (carHealth != null)
+                {
+                    carHealth.TakeDamage(1f);
+                }
+                damageTimer = 0f;
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Car"))
+        {
+            // Hangi collider tarafına çarptığını kontrol et
+            string collidedPart = other.gameObject.name;
+            
+            // Yan taraf check FIRST - daha spesifik
+            if (collidedPart.Contains("Left") || collidedPart.Contains("Right"))
+            {
+                // Yan taraf - hasar veriyor
+                isOnCarSide = true;
+                carTarget = other.transform.parent; // Ana araba GameObject'i
+                damageTimer = 0f;
+            }
+            else if (collidedPart.Contains("Front") || collidedPart.Contains("Back"))
+            {
+                // Ön veya arka - ölüyor
+                HandleKill();
+                ReturnToPool();
+            }
+        }
+        else if (other.transform == target)
         {
             HandleKill();
             ReturnToPool();
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.transform == target || other.CompareTag("Car"))
+        if (other.CompareTag("Car"))
+        {
+            isOnCarSide = false;
+            carTarget = null;
+            damageTimer = 0f;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform == target)
         {
             HandleKill();
             ReturnToPool();
@@ -93,5 +146,8 @@ public class Enemy : MonoBehaviour
         target = null;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
+        isOnCarSide = false;
+        carTarget = null;
+        damageTimer = 0f;
     }
 }

@@ -164,6 +164,10 @@ MonoBehaviour:
   rotationSpeed: 720
   rotationOffset: 90
   goldValue: 10
+  jumpForce: 10
+  jumpCooldown: 2
+  damagePerSecond: 5
+  attackDistance: 2
 --- !u!58 &2125401690570802679
 CircleCollider2D:
   m_ObjectHideFlags: 0

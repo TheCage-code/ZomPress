@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public string levelSceneName = "Level1";
     public string optionsSceneName = "Options";
     public string shopSceneName = "Shop";
+    public string carShopSceneName = "CarShop";
 
     public void StartGame()
     {
@@ -30,6 +31,14 @@ public class MainMenu : MonoBehaviour
         if (!string.IsNullOrEmpty(shopSceneName))
         {
             SceneManager.LoadScene(shopSceneName);
+        }
+    }
+
+    public void OpenCarShop()
+    {
+        if (!string.IsNullOrEmpty(carShopSceneName))
+        {
+            SceneManager.LoadScene(carShopSceneName);
         }
     }
 
