@@ -79,36 +79,11 @@ public class Enemy : MonoBehaviour
                 carDamageAmount = 6;
             else if (zombieType == ZombieType.Boss)
                 carDamageAmount = 9;
-            
-            // Genel rule: Hasar >= maxHealth ise instant ölsün (ARABA HASAR ALMAZ!)
-            if (finalDamage >= maxHealth)
+
+            // Instant kill kurallari araba seviyesine gore belirlenir.
+            if (CanInstantKillZombie(carHealth.CarLevel))
             {
-                TakeDamage(maxHealth);
-                // Araba hasar almasın - instant kill edebiliyoruz!
-                return;
-            }
-            
-            // Normal zombiler: Car 1+ (baseDamage >= 120) instant ölsün (ARABA HASAR ALMAZ!)
-            if (zombieType == ZombieType.Normal && baseDamage >= 120)
-            {
-                TakeDamage(finalDamage);
-                // Araba hasar almasın - Normal zombi instant!
-                return;
-            }
-            
-            // Big zombiler: Car 4+ (baseDamage >= 150) instant ölsün (ARABA HASAR ALMAZ!)
-            if (zombieType == ZombieType.Big && baseDamage >= 150)
-            {
-                TakeDamage(finalDamage);
-                // Araba hasar almasın - instant kill edebiliyoruz!
-                return;
-            }
-            
-            // Boss zombiler: Car 7+ (baseDamage >= 170) instant ölsün (ARABA HASAR ALMAZ!)
-            if (zombieType == ZombieType.Boss && baseDamage >= 170)
-            {
-                TakeDamage(finalDamage);
-                // Araba hasar almasın - instant kill edebiliyoruz!
+                TakeDamage(currentHealth);
                 return;
             }
             
@@ -122,6 +97,24 @@ public class Enemy : MonoBehaviour
                 damageTimer = 0f;
             }
         }
+    }
+
+    private bool CanInstantKillZombie(int carLevel)
+    {
+        // 0: default araba, hicbir zombiyi instant olduremez.
+        if (carLevel <= 0)
+            return false;
+
+        // 1-3: sadece normal(kucuk) zombiler.
+        if (carLevel <= 3)
+            return zombieType == ZombieType.Normal;
+
+        // 4-6: normal(kucuk) + big zombiler.
+        if (carLevel <= 6)
+            return zombieType != ZombieType.Boss;
+
+        // 7-9: tum zombiler (normal, big, boss).
+        return true;
     }
 
     void OnTriggerEnter2D(Collider2D other)

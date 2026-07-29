@@ -44,7 +44,8 @@ public class CarSeller : MonoBehaviour
         // Set car damage and health based on carId (1-9)
         if (int.TryParse(carId, out int carIndex) && carIndex > 0 && carIndex <= 9)
         {
-            carDamage = 110 + (carIndex * 10);  // 120, 130, 140, ..., 200
+            int baseDamage = 110 + (carIndex * 10);  // 120, 130, 140, ..., 200
+            carDamage = Mathf.RoundToInt(baseDamage * 0.9f);
             carHealth = 100 + (carIndex * 10);  // 110, 120, 130, ..., 190
         }
     }

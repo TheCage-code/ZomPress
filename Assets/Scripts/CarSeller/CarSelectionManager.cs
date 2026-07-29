@@ -104,6 +104,7 @@ public class CarSelectionManager : MonoBehaviour
             var carHealthComponent = carObj.GetComponent<CarHealth>();
             if (carHealthComponent != null)
             {
+                carHealthComponent.SetCarLevel(carIndex);
                 carHealthComponent.SetMaxHealth(UpgradeManager.Instance.currentCarHealth);
                 carHealthComponent.SetCarDamage(UpgradeManager.Instance.currentCarDamage);
             }

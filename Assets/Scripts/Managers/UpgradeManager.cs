@@ -20,7 +20,7 @@ public class UpgradeManager : MonoBehaviour
     public float timeBonusPerPurchase = 5f;
 
     [Header("Car Damage")]
-    public int[] carDamageValues = new int[] { 110, 120, 130, 140, 150, 160, 170, 180, 190 };
+    public int[] carDamageValues = new int[] { 99, 108, 117, 126, 135, 144, 153, 162, 171 };
     
     [Header("Car Health")]
     public int[] carHealthValues = new int[] { 110, 120, 130, 140, 150, 160, 170, 180, 190 };

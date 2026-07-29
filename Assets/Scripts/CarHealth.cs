@@ -4,12 +4,21 @@ using UnityEngine.SceneManagement;
 public class CarHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
-    [SerializeField] private int carDamage = 100;
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+    private const int DefaultCarDamage = 90;
+    [SerializeField] private int carDamage = 90;
+    [SerializeField] private int carLevel = 0;
     public int CarDamage => carDamage; // Getter for zombie damage scaling
+    public int CarLevel => carLevel;
     private float currentHealth;
 
     void Start()
     {
+        if (carLevel <= 0)
+        {
+            carDamage = DefaultCarDamage;
+        }
+
         currentHealth = maxHealth;
     }
 
@@ -22,6 +31,11 @@ public class CarHealth : MonoBehaviour
     public void SetCarDamage(int damage)
     {
         carDamage = damage;
+    }
+
+    public void SetCarLevel(int level)
+    {
+        carLevel = Mathf.Clamp(level, 0, 9);
     }
 
     public void ResetHealth()
@@ -43,7 +57,7 @@ public class CarHealth : MonoBehaviour
     void Die()
     {
         Debug.LogWarning("Car destroyed! Game Over!");
-        Destroy(gameObject);
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     public float GetHealth()

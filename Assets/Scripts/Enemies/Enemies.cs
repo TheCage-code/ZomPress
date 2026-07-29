@@ -69,23 +69,23 @@ public class Enemies : MonoBehaviour
 
         EnemyPool.EnemyType zombieType;
 
-        // İlk 20 saniye: sadece Normal
-        if (gameTimer < 20f)
+        // İlk 30 saniye: sadece Normal
+        if (gameTimer < 30f)
         {
             zombieType = EnemyPool.EnemyType.Normal;
         }
-        // 20-30 saniye: Normal + Big karışık (%70 Normal, %30 Big)
-        else if (gameTimer < 30f)
+        // 30-60 saniye: Normal + Big karışık (%70 Normal, %30 Big)
+        else if (gameTimer < 60f)
         {
             zombieType = Random.value < 0.7f ? EnemyPool.EnemyType.Normal : EnemyPool.EnemyType.Big;
         }
-        // 30 saniye sonrası: Normal + Big + Boss karışık (%60 Normal, %30 Big, %10 Boss)
+        // 60 saniye sonrası: Normal + Big + Boss karışık
         else
         {
             float rand = Random.value;
-            if (rand < 0.6f)
+            if (rand < 0.55f)
                 zombieType = EnemyPool.EnemyType.Normal;
-            else if (rand < 0.9f)
+            else if (rand < 0.85f)
                 zombieType = EnemyPool.EnemyType.Big;
             else
                 zombieType = EnemyPool.EnemyType.Boss;

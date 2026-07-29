@@ -10,8 +10,7 @@ public class EnemyPool : MonoBehaviour
     public Transform enemyParent;
     public enum EnemyType { Normal, Big, Boss }
     public int initialPoolSize = 20;
-
-    private readonly Queue<Enemy> pool = new Queue<Enemy>();
+    private readonly Dictionary<EnemyType, Queue<Enemy>> pools = new Dictionary<EnemyType, Queue<Enemy>>();
 
     void Awake()
     {
@@ -19,6 +18,10 @@ public class EnemyPool : MonoBehaviour
         {
             enemyParent = transform;
         }
+
+        pools[EnemyType.Normal] = new Queue<Enemy>();
+        pools[EnemyType.Big] = new Queue<Enemy>();
+        pools[EnemyType.Boss] = new Queue<Enemy>();
 
         PrewarmPool();
     }
@@ -93,7 +96,7 @@ public class EnemyPool : MonoBehaviour
         enemyScript.pool = this;
         enemyScript.goldDropPrefab = goldDropPrefab;
         instance.SetActive(false);
-        pool.Enqueue(enemyScript);
+        pools[type].Enqueue(enemyScript);
         return enemyScript;
     }
 
@@ -105,10 +108,11 @@ public class EnemyPool : MonoBehaviour
     public Enemy GetEnemy(EnemyType type, Transform target, Vector3 position)
     {
         Enemy enemy;
+        Queue<Enemy> targetPool = pools[type];
 
-        if (pool.Count > 0)
+        if (targetPool.Count > 0)
         {
-            enemy = pool.Dequeue();
+            enemy = targetPool.Dequeue();
         }
         else
         {
@@ -141,7 +145,11 @@ public class EnemyPool : MonoBehaviour
 
     public void ReturnEnemy(Enemy enemy)
     {
+        if (enemy == null)
+            return;
+
         enemy.gameObject.SetActive(false);
-        pool.Enqueue(enemy);
+        EnemyType poolType = (EnemyType)enemy.zombieType;
+        pools[poolType].Enqueue(enemy);
     }
 }
