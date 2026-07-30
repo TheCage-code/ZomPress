@@ -16,11 +16,18 @@ public class CarSelectionManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
 
         Instance = this;
+        
+        // Make sure this is a root GameObject before calling DontDestroyOnLoad
+        if (transform.parent != null)
+        {
+            transform.SetParent(null, false);
+        }
+        
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
         selectedCarId = PlayerPrefs.GetString(SelectedCarKey, string.Empty);
@@ -62,7 +69,7 @@ public class CarSelectionManager : MonoBehaviour
         if (string.IsNullOrEmpty(selectedCarId))
             return;
 
-        var sellers = FindObjectsOfType<CarSeller>();
+        var sellers = FindObjectsByType<CarSeller>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach (var seller in sellers)
         {
             if (seller.CarId == selectedCarId && seller.CarSprite != null)

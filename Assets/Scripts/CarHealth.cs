@@ -5,6 +5,7 @@ public class CarHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [SerializeField] private LevelCompletePanel levelCompletePanel;
     private const int DefaultCarDamage = 90;
     [SerializeField] private int carDamage = 90;
     [SerializeField] private int carLevel = 0;
@@ -57,7 +58,12 @@ public class CarHealth : MonoBehaviour
     void Die()
     {
         Debug.LogWarning("Car destroyed! Game Over!");
-        SceneManager.LoadScene(mainMenuSceneName);
+        
+        // LevelCompletePanel'i aç (mainmenu'ye direkt gitme)
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.ShowLevelComplete();
+        }
     }
 
     public float GetHealth()

@@ -10,13 +10,15 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 3f;
     public float rotationSpeed = 720f;
     public float rotationOffset = -90f;
-    [SerializeField] private int zombieBaseDamage = 0;
     [SerializeField] private int _goldValue = 10;
     public int goldValue { get => _goldValue; set => _goldValue = value; }
     public enum ZombieType { Normal, Big, Boss }
     public ZombieType zombieType = ZombieType.Normal;
     public int maxHealth = 100;
     private int currentHealth = 100;
+    
+    [SerializeField] private ParticleSystem bloodEffect;
+    [SerializeField] private float deathEffectDuration = 0.5f;
 
 
     private Rigidbody2D rb;
@@ -190,6 +192,19 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        // Sprite'ı kapat
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = false;
+        }
+        
+        // Kan efekti oynat
+        if (bloodEffect != null)
+        {
+            bloodEffect.Play();
+        }
+        
         // Gold drop oluştur
         if (pool != null && goldDropPrefab != null)
         {
@@ -206,11 +221,26 @@ public class Enemy : MonoBehaviour
             manager.EnemyDefeated();
         }
 
+        // Effect bitene kadar bekle, sonra pool'a dön
+        StartCoroutine(DeathSequence());
+    }
+
+    private System.Collections.IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(deathEffectDuration);
         ReturnToPool();
     }
 
     void ReturnToPool()
     {
+        // Sprite'ı geri aç
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = true;
+        }
+        
+        currentHealth = maxHealth;
         gameObject.SetActive(false);
         if (pool != null)
         {

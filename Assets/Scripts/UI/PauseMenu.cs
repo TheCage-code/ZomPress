@@ -39,6 +39,12 @@ public class PauseMenu : MonoBehaviour
             pausePanel.SetActive(true);
         }
 
+        // Müziği durdur
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
+
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -53,6 +59,12 @@ public class PauseMenu : MonoBehaviour
         if (optionsPanel != null)
         {
             optionsPanel.SetActive(false);
+        }
+
+        // Müzik ekranı yenile (scene müziğine dön)
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.RefreshSceneMusic();
         }
 
         Time.timeScale = 1f;

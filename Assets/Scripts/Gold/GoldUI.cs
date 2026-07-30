@@ -5,27 +5,19 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TMP_Text))]
 public class GoldUI : MonoBehaviour
 {
-    private static GoldUI _instance;
     public TMP_Text goldText;
     public Image goldImage;
 
     private bool subscribed;
 
-    void Awake()
+    void Start()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-
         if (goldText == null)
         {
             goldText = GetComponent<TMP_Text>();
         }
+        
+        TrySubscribe();
     }
 
     void OnEnable()
@@ -53,11 +45,20 @@ public class GoldUI : MonoBehaviour
 
     void TrySubscribe()
     {
+        if (goldText == null)
+        {
+            goldText = GetComponent<TMP_Text>();
+        }
+
         if (GoldManager.Instance == null)
             return;
 
-        GoldManager.Instance.OnGoldChanged += UpdateGoldText;
-        subscribed = true;
+        if (!subscribed)
+        {
+            GoldManager.Instance.OnGoldChanged += UpdateGoldText;
+            subscribed = true;
+        }
+        
         UpdateGoldText(GoldManager.Instance.CurrentGold);
     }
 

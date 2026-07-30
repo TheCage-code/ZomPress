@@ -828,7 +828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3cbc2a55d6a654d86d80f498c50d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoldManager
-  startingGold: 313131
+  startingGold: 0
 --- !u!4 &353839565
 Transform:
   m_ObjectHideFlags: 0
@@ -986,7 +986,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 361973204}
-  - component: {fileID: 361973203}
   m_Layer: 0
   m_Name: upgrademanager
   m_TagString: Untagged
@@ -994,24 +993,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &361973203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361973202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6187596d181110346bdb41d860918dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
-  speedUpgradeCostBase: 10
-  timeUpgradeCostBase: 10
-  speedBonusPerPurchase: 1
-  timeBonusPerPurchase: 5
-  carDamageValues: 6e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000
-  carHealthValues: 6e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000
 --- !u!4 &361973204
 Transform:
   m_ObjectHideFlags: 0
@@ -1403,12 +1384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   audioMixer: {fileID: 24100000, guid: 084e00564b60c664d90b8f6fca71fd54, type: 2}
-  masterVolumeParam: MasterVolume
   musicVolumeParam: MusicVolume
-  sfxVolumeParam: SFXVolume
-  masterPrefKey: Audio_Master
   musicPrefKey: Audio_Music
-  sfxPrefKey: Audio_SFX
   musicSource: {fileID: 1135146245}
   defaultMusicSourceVolume: 1
   musicFadeDuration: 0.35
@@ -1927,7 +1904,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538965876}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e18009034570fb74a9a04fa859ecba43, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 0a1a90686388b184ab318783006fb5e8, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

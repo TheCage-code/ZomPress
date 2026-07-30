@@ -4,9 +4,7 @@ using UnityEngine.UI;
 public class VolumeSettingsUI : MonoBehaviour
 {
     [Header("Sliders")]
-    [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
 
     private bool listenersBound;
 
@@ -29,25 +27,13 @@ public class VolumeSettingsUI : MonoBehaviour
             return;
         }
 
-        ConfigureSlider(masterSlider, audioManager.GetMasterVolumeLinear());
         ConfigureSlider(musicSlider, audioManager.GetMusicVolumeLinear());
-        ConfigureSlider(sfxSlider, audioManager.GetSfxVolumeLinear());
 
         UnbindListeners();
-
-        if (masterSlider != null)
-        {
-            masterSlider.onValueChanged.AddListener(audioManager.SetMasterVolume);
-        }
 
         if (musicSlider != null)
         {
             musicSlider.onValueChanged.AddListener(audioManager.SetMusicVolume);
-        }
-
-        if (sfxSlider != null)
-        {
-            sfxSlider.onValueChanged.AddListener(audioManager.SetSfxVolume);
         }
 
         listenersBound = true;
@@ -73,19 +59,9 @@ public class VolumeSettingsUI : MonoBehaviour
         if (audioManager == null)
             return;
 
-        if (masterSlider != null)
-        {
-            masterSlider.onValueChanged.RemoveListener(audioManager.SetMasterVolume);
-        }
-
         if (musicSlider != null)
         {
             musicSlider.onValueChanged.RemoveListener(audioManager.SetMusicVolume);
-        }
-
-        if (sfxSlider != null)
-        {
-            sfxSlider.onValueChanged.RemoveListener(audioManager.SetSfxVolume);
         }
 
         listenersBound = false;

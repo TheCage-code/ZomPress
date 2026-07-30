@@ -8,6 +8,7 @@ public class LevelTimer : MonoBehaviour
     public string mainMenuSceneName = "MainMenu";
     public TMP_Text timerText;
     public bool stopOnTimeUp = true;
+    [SerializeField] private LevelCompletePanel levelCompletePanel;
 
     private float remainingTime;
     private bool isFinished;
@@ -24,13 +25,21 @@ public class LevelTimer : MonoBehaviour
     {
         float totalTime = levelTime;
 
+        // UpgradeManager'dan süre bonusu al, yoksa PlayerPrefs'ten yükle
         if (UpgradeManager.Instance != null)
         {
             totalTime += UpgradeManager.Instance.totalTimeBonus;
         }
+        else
+        {
+            // Fallback: PlayerPrefs'ten doğrudan yükle
+            int timeUpgradeCount = PlayerPrefs.GetInt("TimeUpgradeCount", 0);
+            totalTime += timeUpgradeCount * 5f; // 5f = timeBonusPerPurchase
+        }
 
         remainingTime = totalTime;
         isFinished = false;
+        Time.timeScale = 1f;
         UpdateTimerUI();
     }
 
@@ -96,10 +105,10 @@ public class LevelTimer : MonoBehaviour
             Time.timeScale = 0f;
         }
 
-        if (!string.IsNullOrEmpty(mainMenuSceneName))
+        // LevelCompletePanel'i aç (mainmenu'ye direkt gitme)
+        if (levelCompletePanel != null)
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(mainMenuSceneName);
+            levelCompletePanel.ShowLevelComplete();
         }
     }
 }

@@ -22,11 +22,18 @@ public class GoldManager : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
 
         _instance = this;
+        
+        // Make sure this is a root GameObject before calling DontDestroyOnLoad
+        if (transform.parent != null)
+        {
+            transform.SetParent(null, false);
+        }
+        
         DontDestroyOnLoad(gameObject);
         LoadGold();
     }

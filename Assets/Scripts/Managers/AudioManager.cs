@@ -9,14 +9,10 @@ public class AudioManager : MonoBehaviour
 
     [Header("Mixer")]
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private string masterVolumeParam = "MasterVolume";
     [SerializeField] private string musicVolumeParam = "MusicVolume";
-    [SerializeField] private string sfxVolumeParam = "SFXVolume";
 
     [Header("PlayerPrefs Keys")]
-    [SerializeField] private string masterPrefKey = "Audio_Master";
     [SerializeField] private string musicPrefKey = "Audio_Music";
-    [SerializeField] private string sfxPrefKey = "Audio_SFX";
 
     [Header("Music Source")]
     [SerializeField] private AudioSource musicSource;
@@ -37,20 +33,24 @@ public class AudioManager : MonoBehaviour
     private Coroutine fadeRoutine;
 
     private const float MinLinearVolume = 0.0001f;
-    private bool warnedMissingMasterParam;
-    private bool warnedMissingMusicParam;
-    private bool warnedMissingSfxParam;
     private bool usingMusicSourceFallback;
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
 
         Instance = this;
+        
+        // Make sure this is a root GameObject before calling DontDestroyOnLoad
+        if (transform.parent != null)
+        {
+            transform.SetParent(null, false);
+        }
+        
         DontDestroyOnLoad(gameObject);
 
         if (musicSource == null)
@@ -90,70 +90,25 @@ public class AudioManager : MonoBehaviour
         UpdateMusicForScene(scene.name);
     }
 
-    public void SetMasterVolume(float linearValue)
-    {
-        float clamped = Mathf.Clamp01(linearValue);
-        bool appliedToMixer = SetMixerVolume(masterVolumeParam, clamped);
-        if (!appliedToMixer)
-        {
-            AudioListener.volume = clamped;
-            if (!warnedMissingMasterParam)
-            {
-                warnedMissingMasterParam = true;
-                Debug.LogWarning("AudioManager: MasterVolume exposed param missing. Using AudioListener.volume fallback.");
-            }
-        }
-
-        PlayerPrefs.SetFloat(masterPrefKey, clamped);
-        PlayerPrefs.Save();
-    }
-
     public void SetMusicVolume(float linearValue)
     {
         float clamped = Mathf.Clamp01(linearValue);
         bool appliedToMixer = SetMixerVolume(musicVolumeParam, clamped);
-        if (!appliedToMixer && musicSource != null)
+        
+        // Her durumda musicSource'un volume'ünü de ayarla (fallback veya direct)
+        if (musicSource != null)
         {
             EnableMusicSourceFallback();
             musicSource.volume = clamped;
-            if (!warnedMissingMusicParam)
-            {
-                warnedMissingMusicParam = true;
-                Debug.LogWarning("AudioManager: MusicVolume exposed param missing. Using AudioSource.volume fallback.");
-            }
         }
 
         PlayerPrefs.SetFloat(musicPrefKey, clamped);
         PlayerPrefs.Save();
     }
 
-    public void SetSfxVolume(float linearValue)
-    {
-        float clamped = Mathf.Clamp01(linearValue);
-        bool appliedToMixer = SetMixerVolume(sfxVolumeParam, clamped);
-        if (!appliedToMixer && !warnedMissingSfxParam)
-        {
-            warnedMissingSfxParam = true;
-            Debug.LogWarning("AudioManager: SFXVolume exposed param missing. Assign/expose SFX group to control SFX volume.");
-        }
-
-        PlayerPrefs.SetFloat(sfxPrefKey, clamped);
-        PlayerPrefs.Save();
-    }
-
-    public float GetMasterVolumeLinear()
-    {
-        return PlayerPrefs.GetFloat(masterPrefKey, 1f);
-    }
-
     public float GetMusicVolumeLinear()
     {
         return PlayerPrefs.GetFloat(musicPrefKey, 1f);
-    }
-
-    public float GetSfxVolumeLinear()
-    {
-        return PlayerPrefs.GetFloat(sfxPrefKey, 1f);
     }
 
     public void PlayMusic(AudioClip clip, bool forceRestart = false)
@@ -200,24 +155,16 @@ public class AudioManager : MonoBehaviour
 
     private void ApplySavedVolumes()
     {
-        float master = GetMasterVolumeLinear();
         float music = GetMusicVolumeLinear();
-        float sfx = GetSfxVolumeLinear();
 
-        bool masterApplied = SetMixerVolume(masterVolumeParam, master);
-        if (!masterApplied)
-        {
-            AudioListener.volume = master;
-        }
-
-        bool musicApplied = SetMixerVolume(musicVolumeParam, music);
-        if (!musicApplied && musicSource != null)
+        SetMixerVolume(musicVolumeParam, music);
+        
+        // Her durumda musicSource'un volume'ünü de ayarla
+        if (musicSource != null)
         {
             EnableMusicSourceFallback();
             musicSource.volume = music;
         }
-
-        SetMixerVolume(sfxVolumeParam, sfx);
     }
 
     private bool SetMixerVolume(string parameterName, float linearValue)
@@ -225,8 +172,17 @@ public class AudioManager : MonoBehaviour
         if (audioMixer == null || string.IsNullOrEmpty(parameterName))
             return false;
 
-        float decibel = Mathf.Log10(Mathf.Max(linearValue, MinLinearVolume)) * 20f;
-        return audioMixer.SetFloat(parameterName, decibel);
+        try
+        {
+            float decibel = Mathf.Log10(Mathf.Max(linearValue, MinLinearVolume)) * 20f;
+            audioMixer.SetFloat(parameterName, decibel);
+            return true;
+        }
+        catch (UnityException)
+        {
+            // Exposed parameter does not exist
+            return false;
+        }
     }
 
     private void UpdateMusicForScene(string sceneName)

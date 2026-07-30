@@ -84,12 +84,12 @@ public class ShopMenu : MonoBehaviour
 
         if (speedCostText != null && UpgradeManager.Instance != null)
         {
-            speedCostText.text = UpgradeManager.Instance.speedUpgradeCost.ToString();
+            speedCostText.text = UpgradeManager.Instance.IsSpeedUpgradeMaxed ? "max" : UpgradeManager.Instance.speedUpgradeCost.ToString();
         }
 
         if (timeCostText != null && UpgradeManager.Instance != null)
         {
-            timeCostText.text = UpgradeManager.Instance.timeUpgradeCost.ToString();
+            timeCostText.text = UpgradeManager.Instance.IsTimeUpgradeMaxed ? "max" : UpgradeManager.Instance.timeUpgradeCost.ToString();
         }
 
         if (speedBonusText != null && UpgradeManager.Instance != null)

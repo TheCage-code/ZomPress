@@ -19,6 +19,10 @@ public class UpgradeManager : MonoBehaviour
     public float speedBonusPerPurchase = 1f;
     public float timeBonusPerPurchase = 5f;
 
+    [Header("Max Upgrades")]
+    private const int MAX_SPEED_UPGRADES = 10;
+    private const int MAX_TIME_UPGRADES = 20;
+
     [Header("Car Damage")]
     public int[] carDamageValues = new int[] { 99, 108, 117, 126, 135, 144, 153, 162, 171 };
     
@@ -35,6 +39,10 @@ public class UpgradeManager : MonoBehaviour
     public int currentCarDamage => carDamageValues[selectedCarIndex];
     public int currentCarHealth => carHealthValues[selectedCarIndex];
     
+    // Max kontrol
+    public bool IsSpeedUpgradeMaxed => speedUpgradeCount >= MAX_SPEED_UPGRADES;
+    public bool IsTimeUpgradeMaxed => timeUpgradeCount >= MAX_TIME_UPGRADES;
+    
     // Dinamik upgrade cost'ları
     public int speedUpgradeCost => speedUpgradeCostBase * (speedUpgradeCount + 1);
     public int timeUpgradeCost => timeUpgradeCostBase * (timeUpgradeCount + 1);
@@ -43,11 +51,18 @@ public class UpgradeManager : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
             return;
         }
 
         _instance = this;
+        
+        // Make sure this is a root GameObject before calling DontDestroyOnLoad
+        if (transform.parent != null)
+        {
+            transform.SetParent(null, false);
+        }
+        
         DontDestroyOnLoad(gameObject);
         LoadUpgrades();
     }
@@ -62,17 +77,17 @@ public class UpgradeManager : MonoBehaviour
 
     public bool CanBuySpeedUpgrade()
     {
-        return GoldManager.Instance != null && GoldManager.Instance.CurrentGold >= speedUpgradeCost;
+        return !IsSpeedUpgradeMaxed && GoldManager.Instance != null && GoldManager.Instance.CurrentGold >= speedUpgradeCost;
     }
 
     public bool CanBuyTimeUpgrade()
     {
-        return GoldManager.Instance != null && GoldManager.Instance.CurrentGold >= timeUpgradeCost;
+        return !IsTimeUpgradeMaxed && GoldManager.Instance != null && GoldManager.Instance.CurrentGold >= timeUpgradeCost;
     }
 
     public bool BuySpeedUpgrade()
     {
-        if (!CanBuySpeedUpgrade())
+        if (!CanBuySpeedUpgrade() || IsSpeedUpgradeMaxed)
             return false;
 
         if (GoldManager.Instance.SpendGold(speedUpgradeCost))
@@ -87,7 +102,7 @@ public class UpgradeManager : MonoBehaviour
 
     public bool BuyTimeUpgrade()
     {
-        if (!CanBuyTimeUpgrade())
+        if (!CanBuyTimeUpgrade() || IsTimeUpgradeMaxed)
             return false;
 
         if (GoldManager.Instance.SpendGold(timeUpgradeCost))
