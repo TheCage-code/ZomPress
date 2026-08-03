@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public float rotationOffset = -90f;
     [SerializeField] private int _goldValue = 10;
     public int goldValue { get => _goldValue; set => _goldValue = value; }
-    public enum ZombieType { Normal, Big, Boss }
+    public enum ZombieType { Normal = 0, Big = 1, Boss = 2, Little = 3 }
     public ZombieType zombieType = ZombieType.Normal;
     public int maxHealth = 100;
     private int currentHealth = 100;
@@ -22,23 +22,45 @@ public class Enemy : MonoBehaviour
 
 
     private Rigidbody2D rb;
+    private Collider2D[] cachedColliders;
     private bool isOnCarSide = false;
     private Transform carTarget = null;
     private float damageTimer = 0f;
+    private bool isDead = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        cachedColliders = GetComponents<Collider2D>();
         rb.gravityScale = 0f; // Top-down oyun - aşağı düşmesin
+    }
+
+    private void SetCollisionState(bool enabled)
+    {
+        if (cachedColliders == null)
+            return;
+
+        for (int i = 0; i < cachedColliders.Length; i++)
+        {
+            if (cachedColliders[i] != null)
+                cachedColliders[i].enabled = enabled;
+        }
     }
 
     void FixedUpdate()
     {
+        if (isDead)
+            return;
+
         if (target == null)
             return;
 
         // Zombi tipine göre hız ayarla
-        float speed = zombieType == ZombieType.Big ? moveSpeed * 0.7f : moveSpeed;
+        float speed = moveSpeed;
+        if (zombieType == ZombieType.Big)
+            speed = moveSpeed * 0.7f;
+        else if (zombieType == ZombieType.Little)
+            speed = moveSpeed * 1.2f;
 
         Vector2 direction = ((Vector2)target.position - rb.position).normalized;
         rb.linearVelocity = direction * speed;
@@ -81,6 +103,8 @@ public class Enemy : MonoBehaviour
                 carDamageAmount = 6;
             else if (zombieType == ZombieType.Boss)
                 carDamageAmount = 9;
+            else if (zombieType == ZombieType.Little)
+                carDamageAmount = 2;
 
             // Instant kill kurallari araba seviyesine gore belirlenir.
             if (CanInstantKillZombie(carHealth.CarLevel))
@@ -103,13 +127,17 @@ public class Enemy : MonoBehaviour
 
     private bool CanInstantKillZombie(int carLevel)
     {
+        // Little zombiler tüm araba seviyelerinde anında ölür.
+        if (zombieType == ZombieType.Little)
+            return true;
+
         // 0: default araba, hicbir zombiyi instant olduremez.
         if (carLevel <= 0)
             return false;
 
         // 1-3: sadece normal(kucuk) zombiler.
         if (carLevel <= 3)
-            return zombieType == ZombieType.Normal;
+            return zombieType == ZombieType.Normal || zombieType == ZombieType.Little;
 
         // 4-6: normal(kucuk) + big zombiler.
         if (carLevel <= 6)
@@ -183,6 +211,9 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead)
+            return;
+
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -192,6 +223,21 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        if (isDead)
+            return;
+
+        isDead = true;
+        isOnCarSide = false;
+        carTarget = null;
+        damageTimer = 0f;
+        target = null;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+        }
+        SetCollisionState(false);
+
         // Sprite'ı kapat
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
@@ -241,6 +287,12 @@ public class Enemy : MonoBehaviour
         }
         
         currentHealth = maxHealth;
+        isDead = false;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+        SetCollisionState(true);
         gameObject.SetActive(false);
         if (pool != null)
         {

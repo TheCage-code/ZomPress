@@ -8,6 +8,7 @@ public class LevelCompletePanel : MonoBehaviour
     [SerializeField] private GameObject levelCompletePanel;
     [SerializeField] private TMP_Text goldEarnedText;
     [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [SerializeField] private string levelSceneName = "Level1";
     
     private int goldEarned;
 
@@ -76,5 +77,18 @@ public class LevelCompletePanel : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuSceneName);
+    }
+
+    public void PlayAgain()
+    {
+        Time.timeScale = 1f;
+
+        if (!string.IsNullOrEmpty(levelSceneName))
+        {
+            SceneManager.LoadScene(levelSceneName);
+            return;
+        }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

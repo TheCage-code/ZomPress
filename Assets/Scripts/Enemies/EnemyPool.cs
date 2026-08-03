@@ -4,13 +4,17 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject defaultZombiePrefab; // Varsayılan zombi prefab'ı
+    
     public GameObject enemyBigZombiePrefab;
     public GameObject enemyBossZombiePrefab;
     public GameObject goldDropPrefab;
     public Transform enemyParent;
-    public enum EnemyType { Normal, Big, Boss }
+    public enum EnemyType { Normal = 0, Big = 1, Boss = 2, Little = 3 }
     public int initialPoolSize = 20;
     private readonly Dictionary<EnemyType, Queue<Enemy>> pools = new Dictionary<EnemyType, Queue<Enemy>>();
+    private readonly Queue<Enemy> defaultZombiePool = new Queue<Enemy>();
+    private readonly Dictionary<Enemy, Queue<Enemy>> enemyOriginPool = new Dictionary<Enemy, Queue<Enemy>>();
 
     void Awake()
     {
@@ -22,28 +26,41 @@ public class EnemyPool : MonoBehaviour
         pools[EnemyType.Normal] = new Queue<Enemy>();
         pools[EnemyType.Big] = new Queue<Enemy>();
         pools[EnemyType.Boss] = new Queue<Enemy>();
+        pools[EnemyType.Little] = new Queue<Enemy>();
 
         PrewarmPool();
     }
 
     void PrewarmPool()
     {
-        if (enemyPrefab == null)
+        int normalWarmSize = Mathf.Max(1, initialPoolSize / 4);
+
+        // Default zombi pooluna başlangıç yükle
+        if (defaultZombiePrefab != null)
         {
-            Debug.LogError("EnemyPool: enemyPrefab is missing.");
-            return;
+            for (int i = 0; i < normalWarmSize; i++)
+            {
+                CreatePooledEnemy(defaultZombiePrefab, EnemyType.Little, defaultZombiePool);
+            }
         }
 
-        // Normal zombi pooluna başlangıç yükle
-        for (int i = 0; i < initialPoolSize / 3; i++)
+        // enemyPrefab normal pooluna başlangıç yükle
+        if (enemyPrefab != null)
         {
-            CreatePooledEnemy(enemyPrefab, EnemyType.Normal);
+            for (int i = 0; i < normalWarmSize; i++)
+            {
+                CreatePooledEnemy(enemyPrefab, EnemyType.Normal, pools[EnemyType.Normal]);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("EnemyPool: enemyPrefab is missing. Only defaultZombiePrefab can be spawned as normal zombie.");
         }
 
         // Big zombi pooluna başlangıç yükle
         if (enemyBigZombiePrefab != null)
         {
-            for (int i = 0; i < initialPoolSize / 3; i++)
+            for (int i = 0; i < normalWarmSize; i++)
             {
                 CreatePooledEnemy(enemyBigZombiePrefab, EnemyType.Big);
             }
@@ -52,7 +69,7 @@ public class EnemyPool : MonoBehaviour
         // Boss zombi pooluna başlangıç yükle
         if (enemyBossZombiePrefab != null)
         {
-            for (int i = 0; i < initialPoolSize / 3; i++)
+            for (int i = 0; i < normalWarmSize; i++)
             {
                 CreatePooledEnemy(enemyBossZombiePrefab, EnemyType.Boss);
             }
@@ -65,6 +82,11 @@ public class EnemyPool : MonoBehaviour
     }
 
     private Enemy CreatePooledEnemy(GameObject prefab, EnemyType type = EnemyType.Normal)
+    {
+        return CreatePooledEnemy(prefab, type, pools[type]);
+    }
+
+    private Enemy CreatePooledEnemy(GameObject prefab, EnemyType type, Queue<Enemy> targetPool)
     {
         if (prefab == null)
         {
@@ -83,21 +105,66 @@ public class EnemyPool : MonoBehaviour
         }
 
         // Zombi tipini ayarla
-        enemyScript.zombieType = (Enemy.ZombieType)(int)type;
+        enemyScript.zombieType = ConvertToZombieType(type);
         
         // Gold değerini türe göre set et
         if (type == EnemyType.Boss)
             enemyScript.goldValue = 15;
         else if (type == EnemyType.Big)
             enemyScript.goldValue = 5;
+        else if (type == EnemyType.Little)
+            enemyScript.goldValue = 2;
         else
             enemyScript.goldValue = 1;
         
         enemyScript.pool = this;
         enemyScript.goldDropPrefab = goldDropPrefab;
         instance.SetActive(false);
-        pools[type].Enqueue(enemyScript);
+        targetPool.Enqueue(enemyScript);
+        enemyOriginPool[enemyScript] = targetPool;
         return enemyScript;
+    }
+
+    private Enemy TakeFromPoolOrCreate(Queue<Enemy> targetPool, GameObject prefab, EnemyType type)
+    {
+        if (targetPool.Count == 0)
+        {
+            Enemy created = CreatePooledEnemy(prefab, type, targetPool);
+            if (created == null)
+                return null;
+        }
+
+        return targetPool.Count > 0 ? targetPool.Dequeue() : null;
+    }
+
+    private void PrepareEnemyForSpawn(Enemy enemy, EnemyType type, Transform target, Vector3 position)
+    {
+        enemy.zombieType = ConvertToZombieType(type);
+
+        // Gold değerini türe göre set et
+        if (type == EnemyType.Boss)
+            enemy.goldValue = 15;
+        else if (type == EnemyType.Big)
+            enemy.goldValue = 5;
+        else if (type == EnemyType.Little)
+            enemy.goldValue = 2;
+        else
+            enemy.goldValue = 1;
+
+        enemy.target = target;
+        enemy.transform.position = position;
+        enemy.gameObject.SetActive(true);
+    }
+
+    public Enemy GetDefaultZombie(Transform target, Vector3 position)
+    {
+        GameObject prefabToUse = defaultZombiePrefab != null ? defaultZombiePrefab : enemyPrefab;
+        Enemy enemy = TakeFromPoolOrCreate(defaultZombiePool, prefabToUse, EnemyType.Little);
+        if (enemy == null)
+            return null;
+
+        PrepareEnemyForSpawn(enemy, EnemyType.Little, target, position);
+        return enemy;
     }
 
     public Enemy GetEnemy(Transform target, Vector3 position)
@@ -107,39 +174,24 @@ public class EnemyPool : MonoBehaviour
 
     public Enemy GetEnemy(EnemyType type, Transform target, Vector3 position)
     {
-        Enemy enemy;
         Queue<Enemy> targetPool = pools[type];
 
-        if (targetPool.Count > 0)
-        {
-            enemy = targetPool.Dequeue();
-        }
-        else
-        {
-            // Type'a uygun prefab seç
-            GameObject prefabToUse = enemyPrefab;
-            if (type == EnemyType.Big && enemyBigZombiePrefab != null)
-                prefabToUse = enemyBigZombiePrefab;
-            else if (type == EnemyType.Boss && enemyBossZombiePrefab != null)
-                prefabToUse = enemyBossZombiePrefab;
-            
-            enemy = CreatePooledEnemy(prefabToUse, type);
-            if (enemy == null) return null;
-        }
+        // Type'a uygun prefab seç
+        GameObject prefabToUse = enemyPrefab;
+        if (type == EnemyType.Big && enemyBigZombiePrefab != null)
+            prefabToUse = enemyBigZombiePrefab;
+        else if (type == EnemyType.Boss && enemyBossZombiePrefab != null)
+            prefabToUse = enemyBossZombiePrefab;
+        else if (type == EnemyType.Normal && prefabToUse == null)
+            prefabToUse = defaultZombiePrefab;
+        else if (type == EnemyType.Little && prefabToUse == null)
+            prefabToUse = defaultZombiePrefab;
 
-        enemy.zombieType = (Enemy.ZombieType)(int)type;
-        
-        // Gold değerini türe göre set et
-        if (type == EnemyType.Boss)
-            enemy.goldValue = 15;
-        else if (type == EnemyType.Big)
-            enemy.goldValue = 5;
-        else
-            enemy.goldValue = 1;
+        Enemy enemy = TakeFromPoolOrCreate(targetPool, prefabToUse, type);
+        if (enemy == null)
+            return null;
 
-        enemy.target = target;
-        enemy.transform.position = position;
-        enemy.gameObject.SetActive(true);
+        PrepareEnemyForSpawn(enemy, type, target, position);
         return enemy;
     }
 
@@ -149,7 +201,37 @@ public class EnemyPool : MonoBehaviour
             return;
 
         enemy.gameObject.SetActive(false);
-        EnemyType poolType = (EnemyType)enemy.zombieType;
+        if (enemyOriginPool.TryGetValue(enemy, out Queue<Enemy> originPool))
+        {
+            originPool.Enqueue(enemy);
+            return;
+        }
+
+        EnemyType poolType = ConvertToEnemyType(enemy.zombieType);
         pools[poolType].Enqueue(enemy);
+    }
+
+    private Enemy.ZombieType ConvertToZombieType(EnemyType type)
+    {
+        return type switch
+        {
+            EnemyType.Normal => Enemy.ZombieType.Normal,
+            EnemyType.Big => Enemy.ZombieType.Big,
+            EnemyType.Boss => Enemy.ZombieType.Boss,
+            EnemyType.Little => Enemy.ZombieType.Little,
+            _ => Enemy.ZombieType.Normal
+        };
+    }
+
+    private EnemyType ConvertToEnemyType(Enemy.ZombieType type)
+    {
+        return type switch
+        {
+            Enemy.ZombieType.Normal => EnemyType.Normal,
+            Enemy.ZombieType.Big => EnemyType.Big,
+            Enemy.ZombieType.Boss => EnemyType.Boss,
+            Enemy.ZombieType.Little => EnemyType.Little,
+            _ => EnemyType.Normal
+        };
     }
 }

@@ -67,31 +67,45 @@ public class Enemies : MonoBehaviour
         float distance = Random.Range(spawnDistanceMin, spawnDistanceMax);
         Vector3 spawnPosition = player.position + (Vector3)(randomDirection * distance);
 
-        EnemyPool.EnemyType zombieType;
+        Enemy enemy;
 
-        // İlk 30 saniye: sadece Normal
-        if (gameTimer < 30f)
+        // 0-20 sn: sadece Little (default) zombi.
+        if (gameTimer < 20f)
         {
-            zombieType = EnemyPool.EnemyType.Normal;
+            enemy = enemyPool.GetDefaultZombie(player, spawnPosition);
         }
-        // 30-60 saniye: Normal + Big karışık (%70 Normal, %30 Big)
-        else if (gameTimer < 60f)
+        // 20-35 sn: Little (default) + enemyPrefab normal karışık.
+        else if (gameTimer < 35f)
         {
-            zombieType = Random.value < 0.7f ? EnemyPool.EnemyType.Normal : EnemyPool.EnemyType.Big;
+            enemy = Random.value < 0.55f
+                ? enemyPool.GetDefaultZombie(player, spawnPosition)
+                : enemyPool.GetEnemy(EnemyPool.EnemyType.Normal, player, spawnPosition);
         }
-        // 60 saniye sonrası: Normal + Big + Boss karışık
+        // 35-50 sn: Little (default) + normal + big karışık.
+        else if (gameTimer < 50f)
+        {
+            float rand = Random.value;
+            if (rand < 0.45f)
+                enemy = enemyPool.GetDefaultZombie(player, spawnPosition);
+            else if (rand < 0.8f)
+                enemy = enemyPool.GetEnemy(EnemyPool.EnemyType.Normal, player, spawnPosition);
+            else
+                enemy = enemyPool.GetEnemy(EnemyPool.EnemyType.Big, player, spawnPosition);
+        }
+        // 50 sn sonrası: Little (default) + normal + big + boss karışık.
         else
         {
             float rand = Random.value;
-            if (rand < 0.55f)
-                zombieType = EnemyPool.EnemyType.Normal;
-            else if (rand < 0.85f)
-                zombieType = EnemyPool.EnemyType.Big;
+            if (rand < 0.35f)
+                enemy = enemyPool.GetDefaultZombie(player, spawnPosition);
+            else if (rand < 0.65f)
+                enemy = enemyPool.GetEnemy(EnemyPool.EnemyType.Normal, player, spawnPosition);
+            else if (rand < 0.88f)
+                enemy = enemyPool.GetEnemy(EnemyPool.EnemyType.Big, player, spawnPosition);
             else
-                zombieType = EnemyPool.EnemyType.Boss;
+                enemy = enemyPool.GetEnemy(EnemyPool.EnemyType.Boss, player, spawnPosition);
         }
-        
-        Enemy enemy = enemyPool.GetEnemy(zombieType, player, spawnPosition);
+
         if (enemy != null)
         {
             enemy.manager = this;
