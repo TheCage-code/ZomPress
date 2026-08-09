@@ -210,10 +210,19 @@ MonoBehaviour:
   moveSpeed: 3
   rotationSpeed: 720
   rotationOffset: 0
+  blockerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleCheckDistance: 1.1
+  sideCheckAngle: 35
+  stuckSpeedThreshold: 0.05
+  stuckTimeBeforeEscape: 0.5
+  escapeDuration: 0.35
   _goldValue: 10
   zombieType: 0
   maxHealth: 100
   bloodEffect: {fileID: 5588960999669481086}
+  deathEffectDuration: 0.5
 --- !u!1 &8047486966350074013
 GameObject:
   m_ObjectHideFlags: 0

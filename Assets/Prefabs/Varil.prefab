@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8422316098488111571}
   - component: {fileID: 3788093699715585384}
   - component: {fileID: 4028962703238472092}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Varil
   m_TagString: BlockerObject
   m_Icon: {fileID: 0}

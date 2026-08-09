@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MapGenerator : MonoBehaviour
 {
     [Header("References")]
@@ -20,6 +21,12 @@ public class MapGenerator : MonoBehaviour
     public float blockerChunkSpacing = 2f;
     public float minBlockerDistance = 3f;
 
+    [Header("Rare Pickup Settings")]
+    public GameObject rarePickupPrefab;
+    [Range(0f, 1f)] public float rarePickupSpawnChance = 0.0025f;
+    public float rarePickupChunkSpacing = 6f;
+    public float rarePickupMinDistance = 10f;
+
     [Header("Spawn Settings")]
     public float segmentSize = 3f;
     public int initialRadius = 5;
@@ -29,6 +36,8 @@ public class MapGenerator : MonoBehaviour
     private readonly Dictionary<Vector2Int, GameObject> spawnedSegments = new Dictionary<Vector2Int, GameObject>();
     private readonly HashSet<Vector2Int> blockerChunks = new HashSet<Vector2Int>();
     private readonly List<Vector3> blockerPositions = new List<Vector3>();
+    private readonly HashSet<Vector2Int> rarePickupChunks = new HashSet<Vector2Int>();
+    private GameObject activeRarePickup;
 
     void Start()
     {
@@ -109,6 +118,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 spawnedSegments.Remove(chunkPos);
                 blockerChunks.Remove(chunkPos);
+                    rarePickupChunks.Remove(chunkPos);
                 blockerPositions.RemoveAll(pos => WorldToChunk(pos) == chunkPos);
             }
         }
@@ -121,6 +131,7 @@ public class MapGenerator : MonoBehaviour
         GameObject instance = Instantiate(prefab, worldPos, Quaternion.identity, segmentParent);
         spawnedSegments.Add(chunkPos, instance);
         PlaceBlockersInChunk(instance, worldPos);
+        PlaceRarePickupInChunk(instance, worldPos);
     }
 
     GameObject ChooseSegmentPrefab(Vector2Int chunkPos)
@@ -195,6 +206,76 @@ public class MapGenerator : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    void PlaceRarePickupInChunk(GameObject chunk, Vector3 chunkWorldPos)
+    {
+        if (rarePickupPrefab == null)
+            return;
+
+        if (activeRarePickup != null)
+            return;
+
+        Vector2Int chunkCoord = WorldToChunk(chunkWorldPos);
+        if (rarePickupChunkSpacing > 0)
+        {
+            for (int x = -Mathf.FloorToInt(rarePickupChunkSpacing); x <= Mathf.FloorToInt(rarePickupChunkSpacing); x++)
+            {
+                for (int y = -Mathf.FloorToInt(rarePickupChunkSpacing); y <= Mathf.FloorToInt(rarePickupChunkSpacing); y++)
+                {
+                    if (rarePickupChunks.Contains(new Vector2Int(chunkCoord.x + x, chunkCoord.y + y)))
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (Random.value > rarePickupSpawnChance)
+            return;
+
+        float spawnRadius = segmentSize * 0.25f;
+        Vector3 candidatePosition = chunkWorldPos + new Vector3(segmentSize * 0.5f, segmentSize * 0.5f, 0f);
+        float xOffset = Random.Range(-spawnRadius, spawnRadius);
+        float yOffset = Random.Range(-spawnRadius, spawnRadius);
+        candidatePosition += new Vector3(xOffset, yOffset, 0f);
+
+        if (IsRarePickupTooClose(candidatePosition))
+            return;
+
+        GameObject pickupInstance = Instantiate(rarePickupPrefab, candidatePosition, Quaternion.identity, chunk.transform);
+        activeRarePickup = pickupInstance;
+        rarePickupChunks.Add(chunkCoord);
+
+        RareMagnetPickup pickup = pickupInstance.GetComponent<RareMagnetPickup>();
+        if (pickup != null)
+        {
+            pickup.BindOwner(this, chunkCoord);
+        }
+    }
+
+    bool IsRarePickupTooClose(Vector3 position)
+    {
+        if (rarePickupMinDistance <= 0f)
+            return false;
+
+        for (int i = 0; i < blockerPositions.Count; i++)
+        {
+            if (Vector3.Distance(blockerPositions[i], position) < rarePickupMinDistance)
+                return true;
+        }
+
+        return false;
+    }
+
+    public void NotifyRarePickupCollected(GameObject pickup, Vector2Int chunkCoord)
+    {
+        if (activeRarePickup == pickup)
+        {
+            activeRarePickup = null;
+        }
+
+        rarePickupChunks.Remove(chunkCoord);
     }
 
     Vector2Int WorldToChunk(Vector3 worldPosition)

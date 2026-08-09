@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6842242284524384729}
   - component: {fileID: 3042552919814810050}
   - component: {fileID: 5860643241553688944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wood
   m_TagString: BlockerObject
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 434559215624943236}
   - component: {fileID: 6454777399462366335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tilemap_62
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
+    public static Enemies Instance { get; private set; }
+
     [Header("References")]
     public Transform player;
     public EnemyPool enemyPool;
@@ -17,6 +19,25 @@ public class Enemies : MonoBehaviour
     private float spawnTimer;
     private float gameTimer = 0f;
     private readonly List<Enemy> spawnedEnemies = new List<Enemy>();
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     void Start()
     {
@@ -145,5 +166,23 @@ public class Enemies : MonoBehaviour
     {
         // Enemy öldüğünde çağrılır
         // İstatistik takibi vs. için
+    }
+
+    public void InstantKillEnemiesAround(Transform center, float radius)
+    {
+        if (center == null)
+            return;
+
+        for (int i = spawnedEnemies.Count - 1; i >= 0; i--)
+        {
+            Enemy enemy = spawnedEnemies[i];
+            if (enemy == null)
+                continue;
+
+            if (Vector3.Distance(enemy.transform.position, center.position) <= radius)
+            {
+                enemy.TakeDamage(enemy.maxHealth);
+            }
+        }
     }
 }

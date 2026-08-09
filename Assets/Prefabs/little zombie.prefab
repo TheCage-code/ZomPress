@@ -210,6 +210,14 @@ MonoBehaviour:
   moveSpeed: 3
   rotationSpeed: 720
   rotationOffset: 0
+  blockerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleCheckDistance: 1.1
+  sideCheckAngle: 35
+  stuckSpeedThreshold: 0.05
+  stuckTimeBeforeEscape: 0.5
+  escapeDuration: 0.35
   _goldValue: 10
   zombieType: 3
   maxHealth: 100

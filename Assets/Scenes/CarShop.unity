@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a987486b4a8f164889654a6f8c8e7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarSeller
-  carId: 4
+  carId: 6
   carSprite: {fileID: 2122150159659376562, guid: 05f8ef1fea16e374cbecc331d6c0f0c7, type: 3}
   price: 5000
   carDamage: 100
@@ -3708,7 +3708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a987486b4a8f164889654a6f8c8e7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarSeller
-  carId: 4
+  carId: 5
   carSprite: {fileID: -42510797908495410, guid: 05f8ef1fea16e374cbecc331d6c0f0c7, type: 3}
   price: 4000
   carDamage: 100
@@ -6364,9 +6364,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a987486b4a8f164889654a6f8c8e7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarSeller
-  carId: 4
+  carId: 8
   carSprite: {fileID: -1595452984852857664, guid: 05f8ef1fea16e374cbecc331d6c0f0c7, type: 3}
-  price: 7000
+  price: 8000
   carDamage: 100
   carHealth: 10
   carTag: Car
@@ -6758,9 +6758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a987486b4a8f164889654a6f8c8e7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarSeller
-  carId: 4
+  carId: 7
   carSprite: {fileID: -9009328118518407979, guid: 05f8ef1fea16e374cbecc331d6c0f0c7, type: 3}
-  price: 9000
+  price: 7000
   carDamage: 100
   carHealth: 10
   carTag: Car
@@ -6944,9 +6944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a987486b4a8f164889654a6f8c8e7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarSeller
-  carId: 4
+  carId: 9
   carSprite: {fileID: -3526682976045343135, guid: 05f8ef1fea16e374cbecc331d6c0f0c7, type: 3}
-  price: 7000
+  price: 9000
   carDamage: 100
   carHealth: 10
   carTag: Car

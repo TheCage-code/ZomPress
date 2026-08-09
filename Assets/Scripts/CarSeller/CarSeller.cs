@@ -15,6 +15,7 @@ public class CarSeller : MonoBehaviour
     public Button selectButton;
 
     private const string PurchasedKeyPrefix = "PurchasedCar_";
+    private int normalizedCarId = -1;
 
     public string CarId => carId;
     public Sprite CarSprite => carSprite;
@@ -24,6 +25,7 @@ public class CarSeller : MonoBehaviour
 
     private void Start()
     {
+        CacheCarId();
         InitializeCarStats();
 
         if (buyButton != null)
@@ -39,14 +41,32 @@ public class CarSeller : MonoBehaviour
         UpdateButtons();
     }
 
+    private void CacheCarId()
+    {
+        if (!int.TryParse(carId, out normalizedCarId) || normalizedCarId < 1 || normalizedCarId > 9)
+        {
+            normalizedCarId = -1;
+        }
+    }
+
+    private string GetPurchaseKey()
+    {
+        if (normalizedCarId < 1 || normalizedCarId > 9)
+        {
+            return string.Empty;
+        }
+
+        return PurchasedKeyPrefix + normalizedCarId;
+    }
+
     private void InitializeCarStats()
     {
         // Set car damage and health based on carId (1-9)
-        if (int.TryParse(carId, out int carIndex) && carIndex > 0 && carIndex <= 9)
+        if (normalizedCarId > 0)
         {
-            int baseDamage = 110 + (carIndex * 10);  // 120, 130, 140, ..., 200
+            int baseDamage = 110 + (normalizedCarId * 10);  // 120, 130, 140, ..., 200
             carDamage = Mathf.RoundToInt(baseDamage * 0.9f);
-            carHealth = 100 + (carIndex * 10);  // 110, 120, 130, ..., 190
+            carHealth = 100 + (normalizedCarId * 10);  // 110, 120, 130, ..., 190
         }
     }
 
@@ -57,6 +77,12 @@ public class CarSeller : MonoBehaviour
 
     public void OnBuyButtonClicked()
     {
+        string purchaseKey = GetPurchaseKey();
+        if (string.IsNullOrEmpty(purchaseKey))
+        {
+            return;
+        }
+
         if (carSprite == null)
         {
             Debug.LogWarning("CarSeller: car sprite is not assigned.");
@@ -74,7 +100,7 @@ public class CarSeller : MonoBehaviour
             return;
         }
 
-        PlayerPrefs.SetInt(PurchasedKeyPrefix + carId, 1);
+        PlayerPrefs.SetInt(purchaseKey, 1);
         PlayerPrefs.Save();
 
         if (selectButton != null)
@@ -107,7 +133,8 @@ public class CarSeller : MonoBehaviour
 
     private void UpdateButtons()
     {
-        var purchased = PlayerPrefs.GetInt(PurchasedKeyPrefix + carId, 0) == 1;
+        string purchaseKey = GetPurchaseKey();
+        var purchased = !string.IsNullOrEmpty(purchaseKey) && PlayerPrefs.GetInt(purchaseKey, 0) == 1;
 
         if (selectButton != null)
         {

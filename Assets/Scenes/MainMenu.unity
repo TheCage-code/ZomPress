@@ -828,7 +828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3cbc2a55d6a654d86d80f498c50d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoldManager
-  startingGold: 0
+  startingGold: 100000
 --- !u!4 &353839565
 Transform:
   m_ObjectHideFlags: 0

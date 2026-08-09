@@ -82,25 +82,25 @@ public class CarSelectionManager : MonoBehaviour
 
     private void ApplySelectedCar()
     {
-        if (selectedCarSprite == null)
-            return;
-
         var carObj = GameObject.FindWithTag(carTag);
         if (carObj == null)
             return;
 
-        // Apply sprite and scale
-        var sr = carObj.GetComponent<SpriteRenderer>() ?? carObj.GetComponentInChildren<SpriteRenderer>();
-        if (sr != null)
+        // Apply sprite and scale when sprite data is available.
+        if (selectedCarSprite != null)
         {
-            sr.sprite = selectedCarSprite;
-            carObj.transform.localScale = GetCarScale(selectedCarId);
-        }
+            var sr = carObj.GetComponent<SpriteRenderer>() ?? carObj.GetComponentInChildren<SpriteRenderer>();
+            if (sr != null)
+            {
+                sr.sprite = selectedCarSprite;
+                carObj.transform.localScale = GetCarScale(selectedCarId);
+            }
 
-        var uiImage = carObj.GetComponent<UnityEngine.UI.Image>() ?? carObj.GetComponentInChildren<UnityEngine.UI.Image>();
-        if (uiImage != null)
-        {
-            uiImage.sprite = selectedCarSprite;
+            var uiImage = carObj.GetComponent<UnityEngine.UI.Image>() ?? carObj.GetComponentInChildren<UnityEngine.UI.Image>();
+            if (uiImage != null)
+            {
+                uiImage.sprite = selectedCarSprite;
+            }
         }
 
         // Apply car damage and health stats

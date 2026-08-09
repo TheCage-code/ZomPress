@@ -23,6 +23,11 @@ public class LevelTimer : MonoBehaviour
 
     void Start()
     {
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.ResetRoundStats();
+        }
+
         float totalTime = levelTime;
 
         // UpgradeManager'dan süre bonusu al, yoksa PlayerPrefs'ten yükle

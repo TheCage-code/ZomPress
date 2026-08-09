@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6598187240883606799}
   - component: {fileID: 1185208865134289619}
   - component: {fileID: 7294509498863398205}
+  - component: {fileID: 1359194788491124189}
   m_Layer: 0
   m_Name: zombie bigg 2 movement_0
   m_TagString: Untagged
@@ -186,7 +187,38 @@ MonoBehaviour:
   moveSpeed: 3
   rotationSpeed: 720
   rotationOffset: 0
-  zombieBaseDamage: 0
+  blockerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleCheckDistance: 1.1
+  sideCheckAngle: 35
+  stuckSpeedThreshold: 0.05
+  stuckTimeBeforeEscape: 0.5
+  escapeDuration: 0.35
   _goldValue: 10
   zombieType: 1
   maxHealth: 100
+  bloodEffect: {fileID: 0}
+  deathEffectDuration: 0.5
+--- !u!95 &1359194788491124189
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7068647081297680190}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcce0222975734440b8ccf3d7f47c896, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

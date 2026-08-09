@@ -14,13 +14,14 @@ public class UpgradeManager : MonoBehaviour
     [Header("Upgrade Costs")]
     public int speedUpgradeCostBase = 10;
     public int timeUpgradeCostBase = 10;
+    private static readonly int[] speedUpgradeCosts = { 10, 100, 500, 750, 1000 };
 
     [Header("Upgrade Bonuses")]
     public float speedBonusPerPurchase = 1f;
     public float timeBonusPerPurchase = 5f;
 
     [Header("Max Upgrades")]
-    private const int MAX_SPEED_UPGRADES = 10;
+    private const int MAX_SPEED_UPGRADES = 5;
     private const int MAX_TIME_UPGRADES = 20;
 
     [Header("Car Damage")]
@@ -43,8 +44,8 @@ public class UpgradeManager : MonoBehaviour
     public bool IsSpeedUpgradeMaxed => speedUpgradeCount >= MAX_SPEED_UPGRADES;
     public bool IsTimeUpgradeMaxed => timeUpgradeCount >= MAX_TIME_UPGRADES;
     
-    // Dinamik upgrade cost'ları
-    public int speedUpgradeCost => speedUpgradeCostBase * (speedUpgradeCount + 1);
+    // Hiz upgrade maliyeti sirali olarak artar: 10, 100, 500, 750, 1000
+    public int speedUpgradeCost => IsSpeedUpgradeMaxed ? speedUpgradeCosts[MAX_SPEED_UPGRADES - 1] : speedUpgradeCosts[speedUpgradeCount];
     public int timeUpgradeCost => timeUpgradeCostBase * (timeUpgradeCount + 1);
 
     void Awake()
@@ -128,6 +129,9 @@ public class UpgradeManager : MonoBehaviour
         speedUpgradeCount = PlayerPrefs.GetInt("SpeedUpgradeCount", 0);
         timeUpgradeCount = PlayerPrefs.GetInt("TimeUpgradeCount", 0);
         selectedCarIndex = PlayerPrefs.GetInt("SelectedCarIndex", 0);
+
+        speedUpgradeCount = Mathf.Clamp(speedUpgradeCount, 0, MAX_SPEED_UPGRADES);
+        timeUpgradeCount = Mathf.Clamp(timeUpgradeCount, 0, MAX_TIME_UPGRADES);
     }
 
     public void SelectCar(int carIndex)

@@ -10,6 +10,13 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 3f;
     public float rotationSpeed = 720f;
     public float rotationOffset = -90f;
+    [Header("Obstacle Avoidance")]
+    [SerializeField] private LayerMask blockerLayerMask = ~0;
+    [SerializeField] private float obstacleCheckDistance = 1.1f;
+    [SerializeField] private float sideCheckAngle = 35f;
+    [SerializeField] private float stuckSpeedThreshold = 0.05f;
+    [SerializeField] private float stuckTimeBeforeEscape = 0.5f;
+    [SerializeField] private float escapeDuration = 0.35f;
     [SerializeField] private int _goldValue = 10;
     public int goldValue { get => _goldValue; set => _goldValue = value; }
     public enum ZombieType { Normal = 0, Big = 1, Boss = 2, Little = 3 }
@@ -27,6 +34,9 @@ public class Enemy : MonoBehaviour
     private Transform carTarget = null;
     private float damageTimer = 0f;
     private bool isDead = false;
+    private float stuckTimer = 0f;
+    private float escapeTimer = 0f;
+    private Vector2 escapeDirection = Vector2.zero;
 
     void Awake()
     {
@@ -62,7 +72,20 @@ public class Enemy : MonoBehaviour
         else if (zombieType == ZombieType.Little)
             speed = moveSpeed * 1.2f;
 
-        Vector2 direction = ((Vector2)target.position - rb.position).normalized;
+        Vector2 targetOffset = (Vector2)target.position - rb.position;
+        if (targetOffset.sqrMagnitude <= 0.0001f)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        Vector2 desiredDirection = targetOffset.normalized;
+        UpdateStuckAndEscape(desiredDirection);
+
+        Vector2 direction = escapeTimer > 0f
+            ? escapeDirection
+            : GetSteeredDirection(desiredDirection);
+
         rb.linearVelocity = direction * speed;
 
         if (direction.sqrMagnitude > 0.001f)
@@ -71,6 +94,137 @@ public class Enemy : MonoBehaviour
             float nextAngle = Mathf.MoveTowardsAngle(rb.rotation, angle, rotationSpeed * Time.fixedDeltaTime);
             rb.MoveRotation(nextAngle);
         }
+    }
+
+    private Vector2 GetSteeredDirection(Vector2 desiredDirection)
+    {
+        if (!IsDirectionBlocked(desiredDirection))
+            return desiredDirection;
+
+        Vector2 leftDirection = Rotate(desiredDirection, sideCheckAngle);
+        Vector2 rightDirection = Rotate(desiredDirection, -sideCheckAngle);
+
+        bool leftBlocked = IsDirectionBlocked(leftDirection);
+        bool rightBlocked = IsDirectionBlocked(rightDirection);
+
+        if (!leftBlocked && rightBlocked)
+            return leftDirection;
+
+        if (!rightBlocked && leftBlocked)
+            return rightDirection;
+
+        if (!leftBlocked && !rightBlocked)
+        {
+            Vector2 toTarget = ((Vector2)target.position - rb.position).normalized;
+            float leftScore = Vector2.Dot(leftDirection, toTarget);
+            float rightScore = Vector2.Dot(rightDirection, toTarget);
+            return leftScore >= rightScore ? leftDirection : rightDirection;
+        }
+
+        return Random.value < 0.5f ? leftDirection : rightDirection;
+    }
+
+    private void UpdateStuckAndEscape(Vector2 desiredDirection)
+    {
+        if (escapeTimer > 0f)
+        {
+            escapeTimer -= Time.fixedDeltaTime;
+            if (escapeTimer <= 0f)
+            {
+                escapeTimer = 0f;
+                escapeDirection = Vector2.zero;
+            }
+            return;
+        }
+
+        bool isTryingToMove = desiredDirection.sqrMagnitude > 0.0001f;
+        bool isAlmostStopped = rb.linearVelocity.sqrMagnitude < (stuckSpeedThreshold * stuckSpeedThreshold);
+
+        if (isTryingToMove && isAlmostStopped)
+        {
+            stuckTimer += Time.fixedDeltaTime;
+            if (stuckTimer >= stuckTimeBeforeEscape)
+            {
+                StartEscape(desiredDirection);
+            }
+        }
+        else
+        {
+            stuckTimer = 0f;
+        }
+    }
+
+    private void StartEscape(Vector2 desiredDirection)
+    {
+        stuckTimer = 0f;
+        escapeTimer = escapeDuration;
+
+        Vector2 left = Rotate(desiredDirection, 90f);
+        Vector2 right = Rotate(desiredDirection, -90f);
+
+        bool leftBlocked = IsDirectionBlocked(left);
+        bool rightBlocked = IsDirectionBlocked(right);
+
+        if (!leftBlocked && rightBlocked)
+        {
+            escapeDirection = left;
+            return;
+        }
+
+        if (!rightBlocked && leftBlocked)
+        {
+            escapeDirection = right;
+            return;
+        }
+
+        escapeDirection = Random.value < 0.5f ? left : right;
+    }
+
+    private bool IsDirectionBlocked(Vector2 direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, obstacleCheckDistance, blockerLayerMask);
+        if (hit.collider == null)
+            return false;
+
+        if (IsOwnCollider(hit.collider))
+            return false;
+
+        if (hit.collider.isTrigger)
+            return false;
+
+        if (hit.collider.CompareTag("Car"))
+            return false;
+
+        if (target != null && (hit.collider.transform == target || hit.collider.transform.IsChildOf(target)))
+            return false;
+
+        return true;
+    }
+
+    private bool IsOwnCollider(Collider2D other)
+    {
+        if (cachedColliders == null)
+            return false;
+
+        for (int i = 0; i < cachedColliders.Length; i++)
+        {
+            if (cachedColliders[i] == other)
+                return true;
+        }
+
+        return false;
+    }
+
+    private static Vector2 Rotate(Vector2 input, float angle)
+    {
+        float radians = angle * Mathf.Deg2Rad;
+        float sin = Mathf.Sin(radians);
+        float cos = Mathf.Cos(radians);
+
+        return new Vector2(
+            input.x * cos - input.y * sin,
+            input.x * sin + input.y * cos
+        ).normalized;
     }
 
     void Update()
@@ -226,6 +380,12 @@ public class Enemy : MonoBehaviour
         if (isDead)
             return;
 
+        if (!isActiveAndEnabled)
+        {
+            ReturnToPool();
+            return;
+        }
+
         isDead = true;
         isOnCarSide = false;
         carTarget = null;
@@ -260,6 +420,11 @@ public class Enemy : MonoBehaviour
             {
                 goldDropScript.SetGoldValue(goldValue);
             }
+        }
+
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.RegisterKill(zombieType);
         }
 
         if (manager != null)
