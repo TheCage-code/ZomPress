@@ -103,14 +103,7 @@ public class CarSeller : MonoBehaviour
         PlayerPrefs.SetInt(purchaseKey, 1);
         PlayerPrefs.Save();
 
-        if (selectButton != null)
-        {
-            selectButton.gameObject.SetActive(true);
-        }
-        if (buyButton != null)
-        {
-            buyButton.interactable = false;
-        }
+        UpdateButtons();
     }
 
     public void OnSelectButtonClicked()

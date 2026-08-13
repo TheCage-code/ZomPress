@@ -107,6 +107,16 @@ public class EnemyPool : MonoBehaviour
         // Zombi tipini ayarla
         enemyScript.zombieType = ConvertToZombieType(type);
         
+        // Health değerini türe göre set et
+        if (type == EnemyType.Boss)
+            enemyScript.maxHealth = 250;
+        else if (type == EnemyType.Big)
+            enemyScript.maxHealth = 150;
+        else if (type == EnemyType.Little)
+            enemyScript.maxHealth = 50;
+        else
+            enemyScript.maxHealth = 100;
+        
         // Gold değerini türe göre set et
         if (type == EnemyType.Boss)
             enemyScript.goldValue = 15;
@@ -140,6 +150,16 @@ public class EnemyPool : MonoBehaviour
     private void PrepareEnemyForSpawn(Enemy enemy, EnemyType type, Transform target, Vector3 position)
     {
         enemy.zombieType = ConvertToZombieType(type);
+
+        // Health değerini türe göre set et
+        if (type == EnemyType.Boss)
+            enemy.maxHealth = 250;
+        else if (type == EnemyType.Big)
+            enemy.maxHealth = 150;
+        else if (type == EnemyType.Little)
+            enemy.maxHealth = 50;
+        else
+            enemy.maxHealth = 100;
 
         // Gold değerini türe göre set et
         if (type == EnemyType.Boss)

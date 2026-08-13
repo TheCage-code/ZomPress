@@ -703,6 +703,7 @@ MonoBehaviour:
   timeUpgradeCostBase: 10
   speedBonusPerPurchase: 1
   timeBonusPerPurchase: 5
+  damageBonusPerPurchase: 10
   carDamageValues: 6e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000
   carHealthValues: 6e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000
 --- !u!1 &762686036
@@ -1139,12 +1140,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenu
   levelSceneName: Level1
   mainMenuSceneName: MainMenu
-  goldText: {fileID: 0}
+  goldText: {fileID: 1234160839}
   speedCostText: {fileID: 1519911762}
+  damageCostText: {fileID: 2031965624}
   timeCostText: {fileID: 1124791515}
   speedBonusText: {fileID: 1310759539}
+  damageBonusText: {fileID: 585884243}
   timeBonusText: {fileID: 829612226}
   buySpeedButton: {fileID: 584163756}
+  buyDamageButton: {fileID: 2010677539}
   buyTimeButton: {fileID: 1738069756}
   startLevelButton: {fileID: 2099754261}
   exitButton: {fileID: 1609332346}
