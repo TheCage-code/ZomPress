@@ -3,23 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class CarSelectionManager : MonoBehaviour
 {
-    [System.Serializable]
-    private struct CarSpriteEntry
-    {
-        public string carId;
-        public Sprite sprite;
-    }
-
     public static CarSelectionManager Instance { get; private set; }
     private const string SelectedCarKey = "SelectedCarId";
     [SerializeField] private string carTag = "Car";
-    [SerializeField] private CarSpriteEntry[] carSpriteFallbacks;
 
     private string selectedCarId;
     private Sprite selectedCarSprite;
 
     public string SelectedCarId => selectedCarId;
-
 
     private void Awake()
     {
@@ -28,7 +19,6 @@ public class CarSelectionManager : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
-       
 
         Instance = this;
         
@@ -42,7 +32,6 @@ public class CarSelectionManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         selectedCarId = PlayerPrefs.GetString(SelectedCarKey, string.Empty);
     }
-
 
     private void OnDestroy()
     {
@@ -80,7 +69,7 @@ public class CarSelectionManager : MonoBehaviour
         if (string.IsNullOrEmpty(selectedCarId))
             return;
 
-        var sellers = FindObjectsByType<CarSeller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var sellers = FindObjectsByType<CarSeller>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         foreach (var seller in sellers)
         {
             if (seller.CarId == selectedCarId && seller.CarSprite != null)
@@ -89,42 +78,29 @@ public class CarSelectionManager : MonoBehaviour
                 return;
             }
         }
-
-        // Shop sahnesi yuklu degilse, inspector fallback listesinden bul.
-        for (int i = 0; i < carSpriteFallbacks.Length; i++)
-        {
-            if (carSpriteFallbacks[i].carId == selectedCarId && carSpriteFallbacks[i].sprite != null)
-            {
-                selectedCarSprite = carSpriteFallbacks[i].sprite;
-                return;
-            }
-        }
     }
 
     private void ApplySelectedCar()
     {
-        if (string.IsNullOrEmpty(selectedCarId))
-            return;
-
         var carObj = GameObject.FindWithTag(carTag);
         if (carObj == null)
             return;
 
-        // Apply sprite and scale
-        var sr = carObj.GetComponent<SpriteRenderer>() ?? carObj.GetComponentInChildren<SpriteRenderer>();
-        if (sr != null)
+        // Apply sprite and scale when sprite data is available.
+        if (selectedCarSprite != null)
         {
-            if (selectedCarSprite != null)
+            var sr = carObj.GetComponent<SpriteRenderer>() ?? carObj.GetComponentInChildren<SpriteRenderer>();
+            if (sr != null)
             {
                 sr.sprite = selectedCarSprite;
+                carObj.transform.localScale = GetCarScale(selectedCarId);
             }
-            carObj.transform.localScale = GetCarScale(selectedCarId);
-        }
 
-        var uiImage = carObj.GetComponent<UnityEngine.UI.Image>() ?? carObj.GetComponentInChildren<UnityEngine.UI.Image>();
-        if (uiImage != null && selectedCarSprite != null)
-        {
-            uiImage.sprite = selectedCarSprite;
+            var uiImage = carObj.GetComponent<UnityEngine.UI.Image>() ?? carObj.GetComponentInChildren<UnityEngine.UI.Image>();
+            if (uiImage != null)
+            {
+                uiImage.sprite = selectedCarSprite;
+            }
         }
 
         // Apply car damage and health stats

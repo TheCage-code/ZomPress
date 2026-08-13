@@ -9,13 +9,10 @@ public class ShopMenu : MonoBehaviour
     public string mainMenuSceneName = "MainMenu";
     public TMP_Text goldText;
     public TMP_Text speedCostText;
-    public TMP_Text damageCostText;
     public TMP_Text timeCostText;
     public TMP_Text speedBonusText;
-    public TMP_Text damageBonusText;
     public TMP_Text timeBonusText;
     public Button buySpeedButton;
-    public Button buyDamageButton;
     public Button buyTimeButton;
     public Button startLevelButton;
     public Button exitButton;
@@ -29,10 +26,6 @@ public class ShopMenu : MonoBehaviour
         if (buySpeedButton != null)
         {
             buySpeedButton.onClick.AddListener(BuySpeedUpgrade);
-        }
-        if (buyDamageButton != null)
-        {
-            buyDamageButton.onClick.AddListener(BuyDamageUpgrade);
         }
         if (buyTimeButton != null)
         {
@@ -72,14 +65,6 @@ public class ShopMenu : MonoBehaviour
         }
     }
 
-    void BuyDamageUpgrade()
-    {
-        if (UpgradeManager.Instance != null && UpgradeManager.Instance.BuyDamageUpgrade())
-        {
-            UpdateUI();
-        }
-    }
-
     void OpenMainMenu()
     {
         SceneManager.LoadScene(mainMenuSceneName);
@@ -102,11 +87,6 @@ public class ShopMenu : MonoBehaviour
             speedCostText.text = UpgradeManager.Instance.IsSpeedUpgradeMaxed ? "max" : UpgradeManager.Instance.speedUpgradeCost.ToString();
         }
 
-        if (damageCostText != null && UpgradeManager.Instance != null)
-        {
-            damageCostText.text = UpgradeManager.Instance.IsDamageUpgradeMaxed ? "max" : UpgradeManager.Instance.damageUpgradeCost.ToString();
-        }
-
         if (timeCostText != null && UpgradeManager.Instance != null)
         {
             timeCostText.text = UpgradeManager.Instance.IsTimeUpgradeMaxed ? "max" : UpgradeManager.Instance.timeUpgradeCost.ToString();
@@ -115,11 +95,6 @@ public class ShopMenu : MonoBehaviour
         if (speedBonusText != null && UpgradeManager.Instance != null)
         {
             speedBonusText.text = "+" + UpgradeManager.Instance.totalSpeedBonus.ToString();
-        }
-
-        if (damageBonusText != null && UpgradeManager.Instance != null)
-        {
-            damageBonusText.text = "+" + UpgradeManager.Instance.totalDamageBonus.ToString();
         }
 
         if (timeBonusText != null && UpgradeManager.Instance != null)
