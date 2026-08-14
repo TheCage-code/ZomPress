@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class CarSelectionManager : MonoBehaviour
     private Sprite selectedCarSprite;
 
     public string SelectedCarId => selectedCarId;
+    public Sprite SelectedCarSprite => selectedCarSprite;
+    public event Action<Sprite, string> SelectedCarChanged;
 
     private void Awake()
     {
@@ -47,6 +50,7 @@ public class CarSelectionManager : MonoBehaviour
     {
         EnsureSelectedCarSprite();
         ApplySelectedCar();
+        NotifySelectedCarChanged();
     }
 
     public void SetSelectedCar(string carId, Sprite carSprite)
@@ -59,6 +63,15 @@ public class CarSelectionManager : MonoBehaviour
         PlayerPrefs.SetString(SelectedCarKey, selectedCarId);
         PlayerPrefs.Save();
         ApplySelectedCar();
+        NotifySelectedCarChanged();
+    }
+
+    public bool TryGetSelectedCar(out string carId, out Sprite carSprite)
+    {
+        EnsureSelectedCarSprite();
+        carId = selectedCarId;
+        carSprite = selectedCarSprite;
+        return !string.IsNullOrEmpty(carId) && carSprite != null;
     }
 
     private void EnsureSelectedCarSprite()
@@ -143,5 +156,13 @@ public class CarSelectionManager : MonoBehaviour
             default:
                 return new Vector3(1f, 1f, 1f);
         }
+    }
+
+    private void NotifySelectedCarChanged()
+    {
+        if (selectedCarSprite == null)
+            return;
+
+        SelectedCarChanged?.Invoke(selectedCarSprite, selectedCarId);
     }
 }
