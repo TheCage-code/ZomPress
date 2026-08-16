@@ -405,12 +405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6187596d181110346bdb41d860918dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
-  speedUpgradeCostBase: 10
-  timeUpgradeCostBase: 10
-  speedBonusPerPurchase: 1
-  timeBonusPerPurchase: 5
-  carDamageValues: 6e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000
-  carHealthValues: 6e00000078000000820000008c00000096000000a0000000aa000000b4000000be000000
 --- !u!4 &1084751582
 Transform:
   m_ObjectHideFlags: 0
