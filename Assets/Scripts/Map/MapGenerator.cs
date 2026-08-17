@@ -23,9 +23,11 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Rare Pickup Settings")]
     public GameObject rarePickupPrefab;
-    [Range(0f, 1f)] public float rarePickupSpawnChance = 0.0025f;
+    public GameObject[] rarePickupPrefabs;
+    [Range(0f, 1f)] public float rarePickupSpawnChance = 0.02f;
     public float rarePickupChunkSpacing = 6f;
     public float rarePickupMinDistance = 10f;
+    [Range(1, 10)] public int maxActiveRarePickups = 5;
 
     [Header("Spawn Settings")]
     public float segmentSize = 3f;
@@ -37,7 +39,7 @@ public class MapGenerator : MonoBehaviour
     private readonly HashSet<Vector2Int> blockerChunks = new HashSet<Vector2Int>();
     private readonly List<Vector3> blockerPositions = new List<Vector3>();
     private readonly HashSet<Vector2Int> rarePickupChunks = new HashSet<Vector2Int>();
-    private GameObject activeRarePickup;
+    private readonly List<GameObject> activeRarePickups = new List<GameObject>();
 
     void Start()
     {
@@ -210,10 +212,11 @@ public class MapGenerator : MonoBehaviour
 
     void PlaceRarePickupInChunk(GameObject chunk, Vector3 chunkWorldPos)
     {
-        if (rarePickupPrefab == null)
+        GameObject pickupPrefab = GetRarePickupPrefab();
+        if (pickupPrefab == null)
             return;
 
-        if (activeRarePickup != null)
+        if (activeRarePickups.Count >= maxActiveRarePickups)
             return;
 
         Vector2Int chunkCoord = WorldToChunk(chunkWorldPos);
@@ -243,15 +246,32 @@ public class MapGenerator : MonoBehaviour
         if (IsRarePickupTooClose(candidatePosition))
             return;
 
-        GameObject pickupInstance = Instantiate(rarePickupPrefab, candidatePosition, Quaternion.identity, chunk.transform);
-        activeRarePickup = pickupInstance;
+        GameObject pickupInstance = Instantiate(pickupPrefab, candidatePosition, Quaternion.identity, chunk.transform);
+        activeRarePickups.Add(pickupInstance);
         rarePickupChunks.Add(chunkCoord);
 
-        RareMagnetPickup pickup = pickupInstance.GetComponent<RareMagnetPickup>();
-        if (pickup != null)
+        RareMagnetPickup magnetPickup = pickupInstance.GetComponent<RareMagnetPickup>();
+        if (magnetPickup != null)
         {
-            pickup.BindOwner(this, chunkCoord);
+            magnetPickup.BindOwner(this, chunkCoord);
+            return;
         }
+
+        RareHealPickup healPickup = pickupInstance.GetComponent<RareHealPickup>();
+        if (healPickup != null)
+        {
+            healPickup.BindOwner(this, chunkCoord);
+        }
+    }
+
+    GameObject GetRarePickupPrefab()
+    {
+        if (rarePickupPrefabs != null && rarePickupPrefabs.Length > 0)
+        {
+            return rarePickupPrefabs[Random.Range(0, rarePickupPrefabs.Length)];
+        }
+
+        return rarePickupPrefab;
     }
 
     bool IsRarePickupTooClose(Vector3 position)
@@ -270,9 +290,9 @@ public class MapGenerator : MonoBehaviour
 
     public void NotifyRarePickupCollected(GameObject pickup, Vector2Int chunkCoord)
     {
-        if (activeRarePickup == pickup)
+        if (activeRarePickups.Contains(pickup))
         {
-            activeRarePickup = null;
+            activeRarePickups.Remove(pickup);
         }
 
         rarePickupChunks.Remove(chunkCoord);

@@ -10,10 +10,16 @@ public class ShopMenu : MonoBehaviour
     public TMP_Text goldText;
     public TMP_Text speedCostText;
     public TMP_Text timeCostText;
+    public TMP_Text damageCostText;
+    public TMP_Text turretCostText;
     public TMP_Text speedBonusText;
     public TMP_Text timeBonusText;
+    public TMP_Text damageBonusText;
+    public TMP_Text turretStateText;
     public Button buySpeedButton;
     public Button buyTimeButton;
+    public Button buyDamageButton;
+    public Button buyTurretButton;
     public Button startLevelButton;
     public Button exitButton;
 
@@ -30,6 +36,14 @@ public class ShopMenu : MonoBehaviour
         if (buyTimeButton != null)
         {
             buyTimeButton.onClick.AddListener(BuyTimeUpgrade);
+        }
+        if (buyDamageButton != null)
+        {
+            buyDamageButton.onClick.AddListener(BuyDamageUpgrade);
+        }
+        if (buyTurretButton != null)
+        {
+            buyTurretButton.onClick.AddListener(BuyTurret);
         }
         if (startLevelButton != null)
         {
@@ -65,6 +79,22 @@ public class ShopMenu : MonoBehaviour
         }
     }
 
+    void BuyDamageUpgrade()
+    {
+        if (UpgradeManager.Instance != null && UpgradeManager.Instance.BuyDamageUpgrade())
+        {
+            UpdateUI();
+        }
+    }
+
+    void BuyTurret()
+    {
+        if (UpgradeManager.Instance != null && UpgradeManager.Instance.BuyTurret())
+        {
+            UpdateUI();
+        }
+    }
+
     void OpenMainMenu()
     {
         SceneManager.LoadScene(mainMenuSceneName);
@@ -92,6 +122,16 @@ public class ShopMenu : MonoBehaviour
             timeCostText.text = UpgradeManager.Instance.IsTimeUpgradeMaxed ? "max" : UpgradeManager.Instance.timeUpgradeCost.ToString();
         }
 
+        if (damageCostText != null && UpgradeManager.Instance != null)
+        {
+            damageCostText.text = UpgradeManager.Instance.IsDamageUpgradeMaxed ? "max" : UpgradeManager.Instance.damageUpgradeCost.ToString();
+        }
+
+        if (turretCostText != null && UpgradeManager.Instance != null)
+        {
+            turretCostText.text = UpgradeManager.Instance.hasTurret ? "owned" : UpgradeManager.Instance.turretCost.ToString();
+        }
+
         if (speedBonusText != null && UpgradeManager.Instance != null)
         {
             speedBonusText.text = "+" + UpgradeManager.Instance.totalSpeedBonus.ToString();
@@ -100,6 +140,21 @@ public class ShopMenu : MonoBehaviour
         if (timeBonusText != null && UpgradeManager.Instance != null)
         {
             timeBonusText.text = "+" + UpgradeManager.Instance.totalTimeBonus.ToString() + "s";
+        }
+
+        if (damageBonusText != null && UpgradeManager.Instance != null)
+        {
+            damageBonusText.text = "+" + UpgradeManager.Instance.totalDamageBonus.ToString();
+        }
+
+        if (turretStateText != null && UpgradeManager.Instance != null)
+        {
+            turretStateText.text = UpgradeManager.Instance.hasTurret ? "Owned" : "Not Owned";
+        }
+
+        if (buyTurretButton != null && UpgradeManager.Instance != null)
+        {
+            buyTurretButton.interactable = !UpgradeManager.Instance.hasTurret;
         }
     }
 }

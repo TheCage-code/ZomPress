@@ -128,6 +128,12 @@ public class CarSelectionManager : MonoBehaviour
                 carHealthComponent.SetMaxHealth(UpgradeManager.Instance.currentCarHealth);
                 carHealthComponent.SetCarDamage(UpgradeManager.Instance.currentCarDamage);
             }
+
+            if (UpgradeManager.Instance != null)
+            {
+                UpgradeManager.Instance.EnsureTurretOnCar();
+                UpgradeManager.Instance.SetTurretActiveState(UpgradeManager.Instance.hasTurret);
+            }
         }
     }
 

@@ -168,6 +168,28 @@ public class Enemies : MonoBehaviour
         // İstatistik takibi vs. için
     }
 
+    public Enemy GetClosestEnemy(Vector3 origin, float maxDistance)
+    {
+        Enemy closest = null;
+        float closestDistance = maxDistance;
+
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            Enemy enemy = spawnedEnemies[i];
+            if (enemy == null)
+                continue;
+
+            float distance = Vector3.Distance(origin, enemy.transform.position);
+            if (distance <= maxDistance && distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = enemy;
+            }
+        }
+
+        return closest;
+    }
+
     public void InstantKillEnemiesAround(Transform center, float radius)
     {
         if (center == null)

@@ -44,6 +44,16 @@ public class CarHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    public void RestoreHealth(float amount)
+    {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+    }
+
+    public void RestoreFullHealth()
+    {
+        currentHealth = maxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
