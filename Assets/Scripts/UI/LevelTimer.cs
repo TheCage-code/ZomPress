@@ -4,7 +4,7 @@ using TMPro;
 
 public class LevelTimer : MonoBehaviour
 {
-    public float levelTime = 10f;
+    public float levelTime = 20f;
     public string mainMenuSceneName = "MainMenu";
     public TMP_Text timerText;
     public bool stopOnTimeUp = true;
@@ -113,7 +113,7 @@ public class LevelTimer : MonoBehaviour
         // LevelCompletePanel'i aç (mainmenu'ye direkt gitme)
         if (levelCompletePanel != null)
         {
-            levelCompletePanel.ShowLevelComplete();
+            levelCompletePanel.ShowLevelComplete("TIME OVER");
         }
     }
 }

@@ -2828,7 +2828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -229.1, y: -829}
+  m_AnchoredPosition: {x: -229.1, y: -936}
   m_SizeDelta: {x: 157.45, y: 137.93555}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1767445250
@@ -3901,7 +3901,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Turret
+  m_text: NOT OWNED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 637c1334da2d6c54c859f341fdb7bec6, type: 2}
   m_sharedMaterial: {fileID: 3446674227803937521, guid: 637c1334da2d6c54c859f341fdb7bec6, type: 2}
@@ -4062,7 +4062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -252, y: -488}
+  m_AnchoredPosition: {x: -197.5, y: -570.22}
   m_SizeDelta: {x: 163.84, y: 71.1215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8860746789902284813
@@ -4081,8 +4081,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 269.37}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000015258789, y: 269.37}
+  m_SizeDelta: {x: 63.2243, y: -0.0040283}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9042605029228704838
 GameObject:

@@ -21,13 +21,12 @@ public class UpgradeManager : MonoBehaviour
     private static readonly int[] damageUpgradeCosts = { 100, 250, 500, 750, 1000 };
 
     [Header("Upgrade Bonuses")]
-    public float speedBonusPerPurchase = 1f;
+    public float speedBonusPerPurchase = 0.5f;
     public float timeBonusPerPurchase = 5f;
     public int damageBonusPerPurchase = 5;
 
     [Header("Max Upgrades")]
     private const int MAX_SPEED_UPGRADES = 5;
-    private const int MAX_TIME_UPGRADES = 20;
     private const int MAX_DAMAGE_UPGRADES = 5;
 
     [Header("Car Damage")]
@@ -51,7 +50,7 @@ public class UpgradeManager : MonoBehaviour
     
     // Max kontrol
     public bool IsSpeedUpgradeMaxed => speedUpgradeCount >= MAX_SPEED_UPGRADES;
-    public bool IsTimeUpgradeMaxed => timeUpgradeCount >= MAX_TIME_UPGRADES;
+    public bool IsTimeUpgradeMaxed => false;
     public bool IsDamageUpgradeMaxed => damageUpgradeCount >= MAX_DAMAGE_UPGRADES;
     
     // Hiz upgrade maliyeti sirali olarak artar: 10, 100, 500, 750, 1000
@@ -285,7 +284,6 @@ public class UpgradeManager : MonoBehaviour
         hasTurret = PlayerPrefs.GetInt("HasTurret", 0) == 1;
 
         speedUpgradeCount = Mathf.Clamp(speedUpgradeCount, 0, MAX_SPEED_UPGRADES);
-        timeUpgradeCount = Mathf.Clamp(timeUpgradeCount, 0, MAX_TIME_UPGRADES);
         damageUpgradeCount = Mathf.Clamp(damageUpgradeCount, 0, MAX_DAMAGE_UPGRADES);
 
         if (hasTurret)

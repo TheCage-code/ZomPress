@@ -119,7 +119,7 @@ public class ShopMenu : MonoBehaviour
 
         if (timeCostText != null && UpgradeManager.Instance != null)
         {
-            timeCostText.text = UpgradeManager.Instance.IsTimeUpgradeMaxed ? "max" : UpgradeManager.Instance.timeUpgradeCost.ToString();
+            timeCostText.text = UpgradeManager.Instance.timeUpgradeCost.ToString();
         }
 
         if (damageCostText != null && UpgradeManager.Instance != null)

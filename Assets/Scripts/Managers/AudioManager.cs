@@ -20,11 +20,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float musicFadeDuration = 0.35f;
 
     [Header("Music Clips")]
+    [SerializeField] private AudioClip preloadMusic;
     [SerializeField] private AudioClip menuMusic;
     [SerializeField] private AudioClip gameplayMusic;
     [SerializeField] private AudioClip shopMusic;
 
     [Header("Scene Names")]
+    [SerializeField] private string preloadSceneName = "PreLoad";
     [SerializeField] private string mainMenuSceneName = "MainMenu";
     [SerializeField] private string optionsSceneName = "Options";
     [SerializeField] private string shopSceneName = "Shop";
@@ -189,6 +191,12 @@ public class AudioManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(sceneName))
             return;
+
+        if (SceneEquals(sceneName, preloadSceneName))
+        {
+            PlayMusic(preloadMusic != null ? preloadMusic : menuMusic);
+            return;
+        }
 
         if (SceneEquals(sceneName, mainMenuSceneName) || SceneEquals(sceneName, optionsSceneName))
         {

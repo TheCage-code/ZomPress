@@ -1186,6 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelCompletePanel
   levelCompletePanel: {fileID: 577426270}
+  resultTitleText: {fileID: 0}
   roundGoldText: {fileID: 1744592164}
   roundScoreText: {fileID: 808387824}
   highScoreText: {fileID: 554575184}
@@ -2392,7 +2393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df182274ee62c54fbebe3673914699d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelTimer
-  levelTime: 10
+  levelTime: 20
   mainMenuSceneName: MainMenu
   timerText: {fileID: 1511662697}
   stopOnTimeUp: 1
@@ -6474,6 +6475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelCompletePanel
   levelCompletePanel: {fileID: 0}
+  resultTitleText: {fileID: 0}
   roundGoldText: {fileID: 0}
   roundScoreText: {fileID: 0}
   highScoreText: {fileID: 0}

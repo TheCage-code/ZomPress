@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LevelCompletePanel : MonoBehaviour
 {
     [SerializeField] private GameObject levelCompletePanel;
+    [SerializeField] private TMP_Text resultTitleText;
     [SerializeField] private TMP_Text roundGoldText;
     [SerializeField] private TMP_Text roundScoreText;
     [SerializeField] private TMP_Text highScoreText;
@@ -26,6 +27,11 @@ public class LevelCompletePanel : MonoBehaviour
 
     public void ShowLevelComplete()
     {
+        ShowLevelComplete(null);
+    }
+
+    public void ShowLevelComplete(string resultTitle)
+    {
         // Paneli aç
         if (levelCompletePanel != null)
         {
@@ -37,6 +43,11 @@ public class LevelCompletePanel : MonoBehaviour
             {
                 panelImage.enabled = true;
             }
+        }
+
+        if (resultTitleText != null && !string.IsNullOrEmpty(resultTitle))
+        {
+            resultTitleText.text = resultTitle;
         }
 
         UpdateStatsDisplay();

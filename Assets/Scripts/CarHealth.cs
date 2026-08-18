@@ -72,7 +72,7 @@ public class CarHealth : MonoBehaviour
         // LevelCompletePanel'i aç (mainmenu'ye direkt gitme)
         if (levelCompletePanel != null)
         {
-            levelCompletePanel.ShowLevelComplete();
+            levelCompletePanel.ShowLevelComplete("GAME OVER");
         }
     }
 
