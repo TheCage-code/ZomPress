@@ -15,6 +15,8 @@ public class GoldManager : MonoBehaviour
     [Header("Gold Settings")]
     public int startingGold = 0;
 
+    private float passiveGoldAccumulator;
+
     public int CurrentGold { get; private set; }
     public event Action<int> OnGoldChanged;
 
@@ -49,6 +51,24 @@ public class GoldManager : MonoBehaviour
     void Start()
     {
         OnGoldChanged?.Invoke(CurrentGold);
+    }
+
+    void Update()
+    {
+        if (UpgradeManager.Instance == null)
+            return;
+
+        float goldPerSecond = UpgradeManager.Instance.totalGoldBonusPerSecond;
+        if (goldPerSecond <= 0f || Time.timeScale <= 0f)
+            return;
+
+        passiveGoldAccumulator += goldPerSecond * Time.deltaTime;
+        int gainedGold = Mathf.FloorToInt(passiveGoldAccumulator);
+        if (gainedGold <= 0)
+            return;
+
+        passiveGoldAccumulator -= gainedGold;
+        AddGold(gainedGold);
     }
 
     void OnApplicationQuit()

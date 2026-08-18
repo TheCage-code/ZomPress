@@ -139,7 +139,7 @@ public class ShopMenu : MonoBehaviour
 
         if (timeBonusText != null && UpgradeManager.Instance != null)
         {
-            timeBonusText.text = "+" + UpgradeManager.Instance.totalTimeBonus.ToString() + "s";
+            timeBonusText.text = "+" + UpgradeManager.Instance.totalTimeBonus.ToString() + "s / +" + UpgradeManager.Instance.totalGoldBonusPerSecond + " gold/s";
         }
 
         if (damageBonusText != null && UpgradeManager.Instance != null)

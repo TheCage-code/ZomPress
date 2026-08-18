@@ -24,6 +24,7 @@ public class UpgradeManager : MonoBehaviour
     public float speedBonusPerPurchase = 0.5f;
     public float timeBonusPerPurchase = 5f;
     public int damageBonusPerPurchase = 5;
+    public int goldBonusPerTimeUpgrade = 1;
 
     [Header("Max Upgrades")]
     private const int MAX_SPEED_UPGRADES = 5;
@@ -44,6 +45,7 @@ public class UpgradeManager : MonoBehaviour
 
     public float totalSpeedBonus => speedUpgradeCount * speedBonusPerPurchase;
     public float totalTimeBonus => timeUpgradeCount * timeBonusPerPurchase;
+    public int totalGoldBonusPerSecond => timeUpgradeCount * goldBonusPerTimeUpgrade;
     public int totalDamageBonus => damageUpgradeCount * damageBonusPerPurchase;
     public int currentCarDamage => carDamageValues[selectedCarIndex] + totalDamageBonus;
     public int currentCarHealth => carHealthValues[selectedCarIndex];
