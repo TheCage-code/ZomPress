@@ -57,12 +57,14 @@ public class UpgradeManager : MonoBehaviour
     
     // Hiz upgrade maliyeti sirali olarak artar: 10, 100, 500, 750, 1000
     public int speedUpgradeCost => IsSpeedUpgradeMaxed ? speedUpgradeCosts[MAX_SPEED_UPGRADES - 1] : speedUpgradeCosts[speedUpgradeCount];
-    public int timeUpgradeCost => timeUpgradeCostBase * (timeUpgradeCount + 1);
+    public int timeUpgradeCost => timeUpgradeCount == 0
+        ? timeUpgradeCostBase
+        : timeUpgradeCostBase * timeUpgradeCount * 2;
     public int damageUpgradeCost => IsDamageUpgradeMaxed ? damageUpgradeCosts[MAX_DAMAGE_UPGRADES - 1] : damageUpgradeCosts[damageUpgradeCount];
 
     void Awake()
     {
-        var existingManagers = FindObjectsOfType<UpgradeManager>();
+        var existingManagers = FindObjectsByType<UpgradeManager>(FindObjectsSortMode.None);
         if (existingManagers.Length > 1)
         {
             for (int i = 1; i < existingManagers.Length; i++)

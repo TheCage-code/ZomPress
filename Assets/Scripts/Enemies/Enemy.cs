@@ -72,7 +72,8 @@ public class Enemy : MonoBehaviour
         else if (zombieType == ZombieType.Little)
             speed = moveSpeed * 1.2f;
 
-        Vector2 targetOffset = (Vector2)target.position - rb.position;
+        Transform movementTarget = isOnCarSide && carTarget != null ? carTarget : target;
+        Vector2 targetOffset = (Vector2)movementTarget.position - rb.position;
         if (targetOffset.sqrMagnitude <= 0.0001f)
         {
             rb.linearVelocity = Vector2.zero;
@@ -115,7 +116,8 @@ public class Enemy : MonoBehaviour
 
         if (!leftBlocked && !rightBlocked)
         {
-            Vector2 toTarget = ((Vector2)target.position - rb.position).normalized;
+            Transform movementTarget = isOnCarSide && carTarget != null ? carTarget : target;
+            Vector2 toTarget = ((Vector2)movementTarget.position - rb.position).normalized;
             float leftScore = Vector2.Dot(leftDirection, toTarget);
             float rightScore = Vector2.Dot(rightDirection, toTarget);
             return leftScore >= rightScore ? leftDirection : rightDirection;
@@ -261,7 +263,7 @@ public class Enemy : MonoBehaviour
                 carDamageAmount = 2;
 
             // Instant kill kurallari araba seviyesine gore belirlenir.
-            if (CanInstantKillZombie(carHealth.CarLevel))
+            if (CanInstantKillZombie(carHealth.CarLevel, carHealth.CarDamage))
             {
                 TakeDamage(currentHealth);
                 return;
@@ -279,11 +281,24 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private bool CanInstantKillZombie(int carLevel)
+    private bool CanInstantKillZombie(int carLevel, int carDamage)
     {
         // Little zombiler tüm araba seviyelerinde anında ölür.
         if (zombieType == ZombieType.Little)
             return true;
+
+        // Sahne yükleme sırası carLevel'i sıfırlasa bile araba hasarından seviyeyi çıkar.
+        if (carLevel <= 0)
+        {
+            if (carDamage >= 153)
+                return true;
+
+            if (carDamage >= 126)
+                return zombieType != ZombieType.Boss;
+
+            if (carDamage >= 99)
+                return zombieType == ZombieType.Normal;
+        }
 
         // 0: default araba, hicbir zombiyi instant olduremez.
         if (carLevel <= 0)

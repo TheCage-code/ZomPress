@@ -717,11 +717,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemies
   player: {fileID: 1836487620}
   enemyPool: {fileID: 384650349}
-  spawnDistanceMin: 12
-  spawnDistanceMax: 25
-  maxEnemies: 140
-  spawnInterval: 0.3
-  destroyDistance: 50
+  spawnDistanceMin: 5
+  spawnDistanceMax: 15
+  maxEnemies: 200
+  spawnInterval: 0.2
+  destroyDistance: 80
 --- !u!4 &384650348
 Transform:
   m_ObjectHideFlags: 0
@@ -755,7 +755,7 @@ MonoBehaviour:
   enemyBossZombiePrefab: {fileID: 8137806466209531234, guid: 503d23d57f9354b4982eadaceb6318aa, type: 3}
   goldDropPrefab: {fileID: 4011763238656246625, guid: 860e4c91e86267f44802886cd84179c8, type: 3}
   enemyParent: {fileID: 384650348}
-  initialPoolSize: 30
+  initialPoolSize: 50
 --- !u!50 &384650351
 Rigidbody2D:
   serializedVersion: 5
@@ -5270,7 +5270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarHealth
   maxHealth: 100
-  mainMenuSceneName: MainMenu
   levelCompletePanel: {fileID: 577426272}
   carDamage: 100
   carLevel: 0

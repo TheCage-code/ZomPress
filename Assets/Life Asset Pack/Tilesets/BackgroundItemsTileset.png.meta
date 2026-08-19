@@ -1,0 +1,1586 @@
+fileFormatVersion: 2
+guid: eba08eb2875be4d40a20c3fb9c800325
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1930979555631979614
+    second: BackgroundItemsTileset_0
+  - first:
+      213: -8391089938156829752
+    second: BackgroundItemsTileset_1
+  - first:
+      213: 1506586707141409022
+    second: BackgroundItemsTileset_2
+  - first:
+      213: 1134040761047556523
+    second: BackgroundItemsTileset_3
+  - first:
+      213: -6281559905908002428
+    second: BackgroundItemsTileset_4
+  - first:
+      213: -7723419716568702184
+    second: BackgroundItemsTileset_5
+  - first:
+      213: -5831915995451517879
+    second: BackgroundItemsTileset_6
+  - first:
+      213: 3251761266938934579
+    second: BackgroundItemsTileset_7
+  - first:
+      213: -492634378715633155
+    second: BackgroundItemsTileset_8
+  - first:
+      213: 791972146491204023
+    second: BackgroundItemsTileset_9
+  - first:
+      213: -3787947342436571185
+    second: BackgroundItemsTileset_10
+  - first:
+      213: 4406213169896369152
+    second: BackgroundItemsTileset_11
+  - first:
+      213: 5568049376558294258
+    second: BackgroundItemsTileset_12
+  - first:
+      213: 2985847108547368558
+    second: BackgroundItemsTileset_13
+  - first:
+      213: 4540831648501200698
+    second: BackgroundItemsTileset_14
+  - first:
+      213: 1436913968106099084
+    second: BackgroundItemsTileset_15
+  - first:
+      213: -1923991973641757531
+    second: BackgroundItemsTileset_16
+  - first:
+      213: -7481339537969073542
+    second: BackgroundItemsTileset_17
+  - first:
+      213: -5915362502017882610
+    second: BackgroundItemsTileset_18
+  - first:
+      213: -7490964843568309553
+    second: BackgroundItemsTileset_19
+  - first:
+      213: -8320522900544393832
+    second: BackgroundItemsTileset_20
+  - first:
+      213: -4686801492539634896
+    second: BackgroundItemsTileset_21
+  - first:
+      213: -7084810568820184283
+    second: BackgroundItemsTileset_22
+  - first:
+      213: 7817643045675937509
+    second: BackgroundItemsTileset_23
+  - first:
+      213: 3433011337385677215
+    second: BackgroundItemsTileset_24
+  - first:
+      213: 2793196341909294890
+    second: BackgroundItemsTileset_25
+  - first:
+      213: 3560694142070787057
+    second: BackgroundItemsTileset_26
+  - first:
+      213: 8296273765403103248
+    second: BackgroundItemsTileset_27
+  - first:
+      213: 5723537228463400395
+    second: BackgroundItemsTileset_28
+  - first:
+      213: -956182762834732777
+    second: BackgroundItemsTileset_29
+  - first:
+      213: -3911793229089863435
+    second: BackgroundItemsTileset_30
+  - first:
+      213: -6071540293236832078
+    second: BackgroundItemsTileset_31
+  - first:
+      213: -2358562227623375314
+    second: BackgroundItemsTileset_32
+  - first:
+      213: -4634139398102780182
+    second: BackgroundItemsTileset_33
+  - first:
+      213: 2259235476089133544
+    second: BackgroundItemsTileset_34
+  - first:
+      213: 1079812650245482394
+    second: BackgroundItemsTileset_35
+  - first:
+      213: -3974319112556633482
+    second: BackgroundItemsTileset_36
+  - first:
+      213: 2255214751598443186
+    second: BackgroundItemsTileset_37
+  - first:
+      213: 5920435107532551648
+    second: BackgroundItemsTileset_38
+  - first:
+      213: -775216059370129175
+    second: BackgroundItemsTileset_39
+  - first:
+      213: 6587370022665571260
+    second: BackgroundItemsTileset_40
+  - first:
+      213: -6678325348647277972
+    second: BackgroundItemsTileset_41
+  - first:
+      213: -306018883007960651
+    second: BackgroundItemsTileset_42
+  - first:
+      213: 8395164298229620033
+    second: BackgroundItemsTileset_43
+  - first:
+      213: -4022862799165105091
+    second: BackgroundItemsTileset_44
+  - first:
+      213: 6733766486736749213
+    second: BackgroundItemsTileset_45
+  - first:
+      213: -1086021517311565184
+    second: BackgroundItemsTileset_46
+  - first:
+      213: 348538132692003946
+    second: BackgroundItemsTileset_47
+  - first:
+      213: -1388515620598782704
+    second: BackgroundItemsTileset_48
+  - first:
+      213: 5242742264940175044
+    second: BackgroundItemsTileset_49
+  - first:
+      213: 5405859720593684181
+    second: BackgroundItemsTileset_50
+  - first:
+      213: -7495245289305102741
+    second: BackgroundItemsTileset_51
+  - first:
+      213: 7198178399308183918
+    second: BackgroundItemsTileset_52
+  - first:
+      213: 405640742789924290
+    second: BackgroundItemsTileset_53
+  - first:
+      213: -1713241782420472240
+    second: BackgroundItemsTileset_54
+  - first:
+      213: -5796499613271706597
+    second: BackgroundItemsTileset_55
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 526
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3a30e2358c335e0800000000000000
+      internalID: -1930979555631979614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_1
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 511
+        width: 36
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c3cecdb82cdc8b80800000000000000
+      internalID: -8391089938156829752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_2
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 526
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef83d7eb0a878e410800000000000000
+      internalID: 1506586707141409022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 511
+        width: 36
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba1ad03501cecbf00800000000000000
+      internalID: 1134040761047556523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_4
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 526
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4817405fb8a63d8a0800000000000000
+      internalID: -6281559905908002428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_5
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 511
+        width: 36
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 813acae20b6e0d490800000000000000
+      internalID: -7723419716568702184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_6
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 526
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 944913b0d4fd01fa0800000000000000
+      internalID: -5831915995451517879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_7
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 511
+        width: 36
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 335f44ac4a3902d20800000000000000
+      internalID: 3251761266938934579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 462
+        width: 65
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df9628484afc929f0800000000000000
+      internalID: -492634378715633155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_9
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 383
+        width: 36
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b1ac9f9876adfa00800000000000000
+      internalID: 791972146491204023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_10
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 462
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc7ee2226f18e6bc0800000000000000
+      internalID: -3787947342436571185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_11
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 383
+        width: 36
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00c225c6883062d30800000000000000
+      internalID: 4406213169896369152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_12
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 462
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f4a79d386fa54d40800000000000000
+      internalID: 5568049376558294258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_13
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 383
+        width: 36
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e66d792202cdf6920800000000000000
+      internalID: 2985847108547368558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_14
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 462
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a37f3c17356440f30800000000000000
+      internalID: 4540831648501200698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_15
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 295
+        width: 129
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81d2c114a1f0f310800000000000000
+      internalID: 1436913968106099084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 398
+        width: 65
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ac51646e7b9c45e0800000000000000
+      internalID: -1923991973641757531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_17
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 432
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72b44bf351fc2890800000000000000
+      internalID: -7481339537969073542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_18
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 398
+        width: 66
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e06ee85352968eda0800000000000000
+      internalID: -5915362502017882610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 433
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcadb22e92fba0890800000000000000
+      internalID: -7490964843568309553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_20
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 399
+        width: 66
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89d6c878180978c80800000000000000
+      internalID: -8320522900544393832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_21
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 399
+        width: 66
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b8760dfd225feb0800000000000000
+      internalID: -4686801492539634896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 191
+        width: 257
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52b2a881352bdad90800000000000000
+      internalID: -7084810568820184283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_23
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 384
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ee215e2ee8dd7c60800000000000000
+      internalID: 7817643045675937509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_24
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9113ca5f9184af20800000000000000
+      internalID: 3433011337385677215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_25
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 319
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2f8c63264d63c620800000000000000
+      internalID: 2793196341909294890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_26
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 259
+        width: 52
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fb81f3f4702a6130800000000000000
+      internalID: 3560694142070787057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_27
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 335
+        width: 66
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0109e3ab809422370800000000000000
+      internalID: 8296273765403103248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_28
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 191
+        width: 52
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc5e841e8c61e6f40800000000000000
+      internalID: 5723537228463400395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_29
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 263
+        width: 62
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71952e0e7d4fab2f0800000000000000
+      internalID: -956182762834732777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_30
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 271
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f80251a8c486b9c0800000000000000
+      internalID: -3911793229089863435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_31
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 191
+        width: 66
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b8c52e854e8dbba0800000000000000
+      internalID: -6071540293236832078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_32
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 191
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ecad17624b44fd0800000000000000
+      internalID: -2358562227623375314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_33
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 191
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae6f07825ca30bfb0800000000000000
+      internalID: -4634139398102780182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_34
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 191
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e9d04012ba6a5f10800000000000000
+      internalID: 2259235476089133544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_35
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 191
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a97ead162e34cfe00800000000000000
+      internalID: 1079812650245482394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_36
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 144
+        width: 26
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6722400f2d168d8c0800000000000000
+      internalID: -3974319112556633482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_37
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 146
+        width: 35
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bafe313ed12c4f10800000000000000
+      internalID: 2255214751598443186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_38
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 133
+        width: 51
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e5ba3ccc5c992250800000000000000
+      internalID: 5920435107532551648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_39
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 138
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e8b01de911ed35f0800000000000000
+      internalID: -775216059370129175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_40
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 134
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbbc90d522a0b6b50800000000000000
+      internalID: 6587370022665571260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_41
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 137
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6a646b8a72d153a0800000000000000
+      internalID: -6678325348647277972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_42
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 140
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b9afbf727dc0cbf0800000000000000
+      internalID: -306018883007960651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_43
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 138
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14d9403237d918470800000000000000
+      internalID: 8395164298229620033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_44
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 134
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3c51a3299beb28c0800000000000000
+      internalID: -4022862799165105091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_45
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 73
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d92cf5251f4237d50800000000000000
+      internalID: 6733766486736749213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_46
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 76
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 082a63a1f2dade0f0800000000000000
+      internalID: -1086021517311565184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_47
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 87
+        width: 66
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6ce8c5c59146d400800000000000000
+      internalID: 348538132692003946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_48
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 63
+        width: 18
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 015e02556600bbce0800000000000000
+      internalID: -1388515620598782704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_49
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 87
+        width: 66
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ce9fae0056f1c840800000000000000
+      internalID: 5242742264940175044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_50
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 63
+        width: 18
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d6349f36c8750b40800000000000000
+      internalID: 5405859720593684181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_51
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 87
+        width: 66
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b66ac82fe1a8bf790800000000000000
+      internalID: -7495245289305102741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_52
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 63
+        width: 18
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6977a8dd1115e360800000000000000
+      internalID: 7198178399308183918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_53
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 87
+        width: 65
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c54b6c3b1021a500800000000000000
+      internalID: 405640742789924290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_54
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 23
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05e78701da75938e0800000000000000
+      internalID: -1713241782420472240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundItemsTileset_55
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 322
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b14304a1052be8fa0800000000000000
+      internalID: -5796499613271706597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BackgroundItemsTileset_0: -1930979555631979614
+      BackgroundItemsTileset_1: -8391089938156829752
+      BackgroundItemsTileset_10: -3787947342436571185
+      BackgroundItemsTileset_11: 4406213169896369152
+      BackgroundItemsTileset_12: 5568049376558294258
+      BackgroundItemsTileset_13: 2985847108547368558
+      BackgroundItemsTileset_14: 4540831648501200698
+      BackgroundItemsTileset_15: 1436913968106099084
+      BackgroundItemsTileset_16: -1923991973641757531
+      BackgroundItemsTileset_17: -7481339537969073542
+      BackgroundItemsTileset_18: -5915362502017882610
+      BackgroundItemsTileset_19: -7490964843568309553
+      BackgroundItemsTileset_2: 1506586707141409022
+      BackgroundItemsTileset_20: -8320522900544393832
+      BackgroundItemsTileset_21: -4686801492539634896
+      BackgroundItemsTileset_22: -7084810568820184283
+      BackgroundItemsTileset_23: 7817643045675937509
+      BackgroundItemsTileset_24: 3433011337385677215
+      BackgroundItemsTileset_25: 2793196341909294890
+      BackgroundItemsTileset_26: 3560694142070787057
+      BackgroundItemsTileset_27: 8296273765403103248
+      BackgroundItemsTileset_28: 5723537228463400395
+      BackgroundItemsTileset_29: -956182762834732777
+      BackgroundItemsTileset_3: 1134040761047556523
+      BackgroundItemsTileset_30: -3911793229089863435
+      BackgroundItemsTileset_31: -6071540293236832078
+      BackgroundItemsTileset_32: -2358562227623375314
+      BackgroundItemsTileset_33: -4634139398102780182
+      BackgroundItemsTileset_34: 2259235476089133544
+      BackgroundItemsTileset_35: 1079812650245482394
+      BackgroundItemsTileset_36: -3974319112556633482
+      BackgroundItemsTileset_37: 2255214751598443186
+      BackgroundItemsTileset_38: 5920435107532551648
+      BackgroundItemsTileset_39: -775216059370129175
+      BackgroundItemsTileset_4: -6281559905908002428
+      BackgroundItemsTileset_40: 6587370022665571260
+      BackgroundItemsTileset_41: -6678325348647277972
+      BackgroundItemsTileset_42: -306018883007960651
+      BackgroundItemsTileset_43: 8395164298229620033
+      BackgroundItemsTileset_44: -4022862799165105091
+      BackgroundItemsTileset_45: 6733766486736749213
+      BackgroundItemsTileset_46: -1086021517311565184
+      BackgroundItemsTileset_47: 348538132692003946
+      BackgroundItemsTileset_48: -1388515620598782704
+      BackgroundItemsTileset_49: 5242742264940175044
+      BackgroundItemsTileset_5: -7723419716568702184
+      BackgroundItemsTileset_50: 5405859720593684181
+      BackgroundItemsTileset_51: -7495245289305102741
+      BackgroundItemsTileset_52: 7198178399308183918
+      BackgroundItemsTileset_53: 405640742789924290
+      BackgroundItemsTileset_54: -1713241782420472240
+      BackgroundItemsTileset_55: -5796499613271706597
+      BackgroundItemsTileset_6: -5831915995451517879
+      BackgroundItemsTileset_7: 3251761266938934579
+      BackgroundItemsTileset_8: -492634378715633155
+      BackgroundItemsTileset_9: 791972146491204023
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

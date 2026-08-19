@@ -12,8 +12,8 @@ public class Enemies : MonoBehaviour
     [Header("Spawn Settings")]
     public float spawnDistanceMin = 8f;
     public float spawnDistanceMax = 22f;
-    public int maxEnemies = 60;
-    public float spawnInterval = 0.7f;
+    public int maxEnemies = 400;
+    public float spawnInterval = 0.5f;
     public float destroyDistance = 50f;
 
     private float spawnTimer;

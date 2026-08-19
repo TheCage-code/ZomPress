@@ -7,6 +7,7 @@ public class CarSelectionManager : MonoBehaviour
     public static CarSelectionManager Instance { get; private set; }
     private const string SelectedCarKey = "SelectedCarId";
     [SerializeField] private string carTag = "Car";
+    [SerializeField] private Sprite[] carSprites = new Sprite[9];
 
     private string selectedCarId;
     private Sprite selectedCarSprite;
@@ -46,11 +47,31 @@ public class CarSelectionManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void Start()
+    {
+        StartCoroutine(ApplySelectedCarNextFrame());
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         EnsureSelectedCarSprite();
         ApplySelectedCar();
         NotifySelectedCarChanged();
+        StartCoroutine(ApplySelectedCarNextFrame());
+    }
+
+    private System.Collections.IEnumerator ApplySelectedCarNextFrame()
+    {
+        for (int attempt = 0; attempt < 30; attempt++)
+        {
+            yield return null;
+            EnsureSelectedCarSprite();
+            ApplySelectedCar();
+            NotifySelectedCarChanged();
+
+            if (GameObject.FindWithTag(carTag) != null && selectedCarSprite != null)
+                yield break;
+        }
     }
 
     public void SetSelectedCar(string carId, Sprite carSprite)
@@ -61,6 +82,10 @@ public class CarSelectionManager : MonoBehaviour
         selectedCarId = carId;
         selectedCarSprite = carSprite;
         PlayerPrefs.SetString(SelectedCarKey, selectedCarId);
+        if (int.TryParse(selectedCarId, out int carIndex) && carIndex >= 1 && carIndex <= 9)
+        {
+            PlayerPrefs.SetInt("SelectedCarIndex", carIndex - 1);
+        }
         PlayerPrefs.Save();
         ApplySelectedCar();
         NotifySelectedCarChanged();
@@ -82,7 +107,14 @@ public class CarSelectionManager : MonoBehaviour
         if (string.IsNullOrEmpty(selectedCarId))
             return;
 
-        var sellers = FindObjectsByType<CarSeller>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        if (int.TryParse(selectedCarId, out int carIndex) && carIndex >= 1 && carIndex <= carSprites.Length)
+        {
+            selectedCarSprite = carSprites[carIndex - 1];
+            if (selectedCarSprite != null)
+                return;
+        }
+
+        var sellers = FindObjectsByType<CarSeller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var seller in sellers)
         {
             if (seller.CarId == selectedCarId && seller.CarSprite != null)

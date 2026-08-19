@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CarHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
-    [SerializeField] private string mainMenuSceneName = "MainMenu";
     [SerializeField] private LevelCompletePanel levelCompletePanel;
     private const int DefaultCarDamage = 90;
     [SerializeField] private int carDamage = 90;
@@ -15,6 +13,18 @@ public class CarHealth : MonoBehaviour
 
     void Start()
     {
+        string selectedCarId = PlayerPrefs.GetString("SelectedCarId", string.Empty);
+        if (int.TryParse(selectedCarId, out int selectedCarLevel) && selectedCarLevel >= 1 && selectedCarLevel <= 9)
+        {
+            SetCarLevel(selectedCarLevel);
+
+            if (UpgradeManager.Instance != null)
+            {
+                SetMaxHealth(UpgradeManager.Instance.currentCarHealth);
+                SetCarDamage(UpgradeManager.Instance.currentCarDamage);
+            }
+        }
+
         if (carLevel <= 0)
         {
             carDamage = DefaultCarDamage;
