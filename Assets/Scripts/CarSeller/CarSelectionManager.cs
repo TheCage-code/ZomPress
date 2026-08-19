@@ -16,6 +16,21 @@ public class CarSelectionManager : MonoBehaviour
     public Sprite SelectedCarSprite => selectedCarSprite;
     public event Action<Sprite, string> SelectedCarChanged;
 
+    // Guarantees an instance exists from the very first scene, so the saved car
+    // is applied even if the player never visits CarShop after launching the game.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Bootstrap()
+    {
+        if (Instance != null)
+            return;
+
+        var prefab = Resources.Load<CarSelectionManager>("CarSelectionManager");
+        if (prefab != null)
+        {
+            Instantiate(prefab);
+        }
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

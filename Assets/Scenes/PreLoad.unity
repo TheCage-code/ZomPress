@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PreLoadScreen
   displayTime: 5
-  mainMenuSceneName: MainMenu
+  mainMenuSceneName: CarShop
   titleText: {fileID: 496906218}
   letterDelay: 0.31
   imageToActivate: {fileID: 15862160}
